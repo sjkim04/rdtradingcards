@@ -127,7 +127,8 @@ local time = sw:getTime()
     if i == 3 then title = lang.pulled_tripleclick end
 
     if v == "rdnot" then
-      message.channel:send("```" .. title .. "\n@" .. message.author.name .. " got a What is RD Not? card! The What is RD Not? card has been added to " .. uj.pronouns["their"] .. " inventory. The shorthand form of this card is rdnot.\n" .. [[
+	  if uj.lang == "ko" then
+        message.channel:send("```" .. title .. "\n@" .. message.author.name .. lang.rdnot_message_1 .. lang.rdnot_message_2 .. [[
 _________________
 | SR            |
 |               |
@@ -137,6 +138,18 @@ _________________
 |     l  l      |
 |             𝅘𝅥𝅯 |
 _________________```]])
+	  else
+	    message.channel:send("```" .. title .. "\n@" .. message.author.name .. lang.rdnot_message_1 .. uj.pronouns["their"] .. lang.rdnot_message_2 .. [[
+_________________
+| SR            |
+|               |
+|    \____/     |
+|    / TT \  /  |
+|   /|____|\/   |
+|     l  l      |
+|             𝅘𝅥𝅯 |
+_________________```]])
+	  end
     elseif not cdb[v].spoiler then
 	  if uj.lang == "ko" then 
       message.channel:send{embed = {
