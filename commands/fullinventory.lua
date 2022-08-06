@@ -2,6 +2,8 @@ local command = {}
 function command.run(message, mt)
   print(message.author.name .. " did !fullinventory")
   local filename = "savedata/" .. message.author.id .. ".json"
+  local uj = dpf.loadjson(filename, defaultjson)
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/fullinventory.json", "")
 
   local enableShortNames = false
 
@@ -15,7 +17,7 @@ function command.run(message, mt)
   end
 
   if not filename then
-    message.channel:send("Sorry, but I could not find a user named " .. mt[1] .. " in the database. Make sure that you have spelled it right, and that they have at least pulled a card to register!")
+    message.channel:send(lang.user_not_found_1 .. mt[1] .. lang.user_not_found_2)
     return
   end
 
@@ -31,8 +33,8 @@ function command.run(message, mt)
   for k in pairs(uj.inventory) do numkey = numkey + 1 end
 
   local invtable = {}
-  local contentstring = (uj.id == message.author.id and "Your" or "<@" .. uj.id .. ">'s") .. " inventory contains:"
-  local titlestring = 'Full Inventory'
+  local contentstring = (uj.id == message.author.id and lang.embed_your or "<@" .. uj.id .. ">" .. lang.embed_s) .. lang.embed_inventory
+  local titlestring = lang.embed_title
   local invstring = ''
   local previnvstring = ''
   if enableShortNames == true then
@@ -54,7 +56,7 @@ function command.run(message, mt)
       }
       invstring = invtable[i]
       contentstring = ''
-      titlestring = 'Full Inventory (cont.)'
+      titlestring = lang.embed_cont_title
     end
     previnvstring = invstring
   end
