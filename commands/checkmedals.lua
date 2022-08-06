@@ -4,7 +4,7 @@ function command.run(message)
 
   local ujf = ("savedata/" .. message.author.id .. ".json")
   local uj = dpf.loadjson(ujf, defaultjson)
-  local lang = dpf.loadjson("langs/" .. uj.lang .. "/checkmedals.json"
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/checkmedals.json")
 
   for i, v in ipairs(medalrequires) do
     print("checking " .. v.receive)
