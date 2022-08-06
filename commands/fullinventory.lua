@@ -17,7 +17,7 @@ function command.run(message, mt)
   end
 
   if not filename then
-    message.channel:send(lang.user_not_found_1 .. mt[1] .. lang.user_not_found_2)
+    message.channel:send(lang.no_user_1 .. mt[1] .. lang.no_user_2)
     return
   end
 
