@@ -1,0 +1,65 @@
+{
+	"they_they": "유저",
+	"they_them": "유저",
+	"they_their": "유저의",
+	"they_theirs": "유저의 것",
+	"they_theirself": "유저 자신",
+	"they_changed": "당신은 이제부터 유저로 호칭됩니다.",
+	
+	"he_they": "그",
+	"he_them": "그",
+	"he_their": "그의",
+	"he_theirs": "그의 것",
+	"he_theirself": "그 자신",
+	"he_changed": "당신은 이제부터 그로 호칭됩니다.",
+	
+	"she_they": "그녀",
+	"she_them": "그녀",
+	"she_their": "그녀의",
+	"she_theirs": "그녀의 것",
+	"she_theirself": "그녀",
+	"she_changed": "당신은 이제부터 그녀로 호칭됩니다.",
+	
+	"it_they": "it",
+	"it_them": "its",
+	"it_their": "its",
+	"it_theirs": "its",
+	"it_theirself": "itself",
+	"it_changed": "You will now be reffered to with it/its.",
+	
+	"xe_they": "xe",
+	"xe_them": "xem",
+	"xe_their": "xir",
+	"xe_theirs": "xirs",
+	"xe_theirself": "xirself",
+	"xe_changed": "You will now be reffered to with xe/xem.",
+	
+	"sta_they": "sta",
+	"sta_them": "star",
+	"sta_their": "star",
+	"sta_theirs": "stars",
+	"sta_theirself": "starself",
+	"sta_changed": "You will now be reffered to with sta/star.",
+	
+	"ze_they": "ze",
+	"ze_them": "zir",
+	"ze_their": "zir",
+	"ze_theirs": "zirs",
+	"ze_theirself": "zirself",
+	"ze_changed": "You will now be reffered to with ze/zir.",
+	
+	"vee_they": "vee",
+	"vee_them": "veem",
+	"vee_their": "veems",
+	"vee_theirs": "veem's",
+	"vee_theirself": "veeself",
+	"vee_changed": "You will now be reffered to with vee/veem.",
+	
+	"no_value": "Please enter your pronouns.",
+	"no_database_1": "Sorry, but I could not find ",
+	"no_database_2": " pronouns. See if you mispelled, or if your pronouns are in c!pronounlist. If they are not there, you may use c!pronounform to suggest adding them.", 
+	
+	"pronounlist_message": "**Common Pronouns:**\nHe, She, They, It\n\n**Neopronouns:**\nXe, Ze, Sta, Vee\n\n*If your pronouns are not included, please use c!pronounform",
+	
+	"pronounform_message": "Your pronouns not on the RDCard bot? Put your pronouns in this google form and we will look over them!\n**https://forms.gle/nG57xLc8DPHc5G8m9**",
+}
