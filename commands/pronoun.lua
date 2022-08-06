@@ -6,6 +6,7 @@ function command.run(message, mt)
   
   if not uj.pronouns then
     uj.pronouns = {}
+	uj.pronouns["selection"] = "they"
     uj.pronouns["they"] = lang.they_they
     uj.pronouns["them"] = lang.they_them
     uj.pronouns["their"] = lang.they_their
@@ -14,6 +15,7 @@ function command.run(message, mt)
   end
   
   if mt[1] == "they" then
+    uj.pronouns["selection"] = "they"
     uj.pronouns["they"] = lang.they_they
     uj.pronouns["them"] = lang.they_them
     uj.pronouns["their"] = lang.they_their
@@ -21,6 +23,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.they_theirself
     message.channel:send(lang.they_changed)
   elseif mt[1] == "he" then
+    uj.pronouns["selection"] = "he"
     uj.pronouns["they"] = lang.he_they
     uj.pronouns["them"] = lang.he_them
     uj.pronouns["their"] = lang.he_their
@@ -28,6 +31,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.he_theirself
     message.channel:send(lang.he_changed)
   elseif mt[1] == "she" then
+    uj.pronouns["selection"] = "she"
     uj.pronouns["they"] = lang.she_they
     uj.pronouns["them"] = lang.she_them
     uj.pronouns["their"] = lang.she_their
@@ -35,6 +39,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.she_theirself
     message.channel:send(lang.she_changed)
   elseif mt[1] == "it" then
+    uj.pronouns["selection"] = "it"
     uj.pronouns["they"] = lang.it_they
     uj.pronouns["them"] = lang.it_them
     uj.pronouns["their"] = lang.it_their
@@ -42,6 +47,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.it_theirself
     message.channel:send(lang.it_changed)
   elseif mt[1] == "xe" then
+    uj.pronouns["selection"] = "xe"
     uj.pronouns["they"] = lang.xe_they
     uj.pronouns["them"] = lang.xe_them
     uj.pronouns["their"] = lang.xe_their
@@ -49,6 +55,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.xe_theirself
     message.channel:send(lang.xe_changed)
   elseif mt[1] == "sta" then
+    uj.pronouns["selection"] = "sta"
     uj.pronouns["they"] = lang.sta_they
     uj.pronouns["them"] = lang.sta_them
     uj.pronouns["their"] = lang.sta_their
@@ -56,6 +63,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.sta_theirself
     message.channel:send(lang.sta_changed)
   elseif mt[1] == "ze" then
+    uj.pronouns["selection"] = "ze"
     uj.pronouns["they"] = lang.ze_they
     uj.pronouns["them"] = lang.ze_them
     uj.pronouns["their"] = lang.ze_their
@@ -63,6 +71,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang.ze_theirself
     message.channel:send(lang.ze_changed)
   elseif mt[1] == "vee" then
+    uj.pronouns["selection"] = "vee"
     uj.pronouns["they"] = lang.vee_they
     uj.pronouns["them"] = lang.vee_them
     uj.pronouns["their"] = lang.vee_their

@@ -58,6 +58,7 @@ function command.run(message, mt, overwrite)
       lastbox = -24,
       tokens = 0,
       pronouns = {
+		selection = "they",
         their = "their",
         them = "them",
         theirself = "themself",
@@ -661,10 +662,15 @@ function command.run(message, mt, overwrite)
     addcommand("togglecheck",cmd.togglecheck)
     addcommand("togglecc",cmd.togglecc)
     addcommand("piss",cmd.use,0,{"terminal", "piss"},true)
+	addcommand("language",cmd.language)
+	addcommand("lang",cmd.language)
     _G['handlemessage'] = function (message, content)
 	local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
 		if not uj.lang then
 			uj.lang = "en"
+		end
+		if not uj.pronouns["selection"] then
+		  uj.pronouns["selection"] = uj.pronouns["they"]
 		end
 		dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
       if message.author.id ~= client.user.id or content then
