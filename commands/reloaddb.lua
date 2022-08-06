@@ -64,6 +64,7 @@ function command.run(message, mt, overwrite)
         they = "they",
         theirs = "theirs"
       },
+	  lang = "en",
       room = 0,
       -- chickstats = {
       --   bodycolor = {255, 250, 0},
@@ -643,9 +644,14 @@ function command.run(message, mt, overwrite)
     addcommand("catch",cmd.catch)
     addcommand("giveitem",cmd.giveitem)
     addcommand("prestige",cmd.prestige)
-    addcommand("checkcard",cmd.checkcard)
+	addcommand("checkcard",cmd.checkcard)
     addcommand("piss",cmd.use,0,{"terminal", "piss"},true)
     _G['handlemessage'] = function (message, content)
+	local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
+		if not uj.lang then
+			uj.lang = "en"
+		end
+		dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
       if message.author.id ~= client.user.id or content then
         local messagecontent = content or message.content
         for i,v in ipairs(commands) do
@@ -1076,4 +1082,3 @@ function command.run(message, mt, overwrite)
   --print(message.author.name .. " did !reloaddb")
 end
 return command
-  
