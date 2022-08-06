@@ -1,8 +1,8 @@
 local command = {}
 function command.run(message, mt)
   print(message.author.name .. " did !pronoun")
-  local uj = dpf.loadjson("savedata/" .. message.author.id .. "/pronoun.json", defaultjson)
-  local lang = dpf.loadjson("langs/" .. uj.lang .. ".json", "")
+  local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/pronoun.json", "")
   
   if not uj.pronouns then
     uj.pronouns = {}
