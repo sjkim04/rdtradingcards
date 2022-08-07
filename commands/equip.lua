@@ -79,7 +79,7 @@ function command.run(message, mt)
     --woo hoo
     print(uj.equipped)
     if not uj.skipprompts then
-      ynbuttons(message,lang.prompt_1 .. itemdb[uj.equipped].name .. lang.prompt_2 .. itemdb[curfilename].name .. lang.prompt_3,"equip",{newequip = curfilename})
+      ynbuttons(message,lang.prompt_1 .. itemdb[uj.equipped].name .. lang.prompt_2 .. itemdb[curfilename].name .. lang.prompt_3,"equip",{newequip = curfilename}, uj.id, uj.lang)
     else
       uj.equipped = curfilename
       message.channel:send("<@" .. uj.id .. "> " .. lang.equipped_1 .. itemdb[curfilename].name .. lang.equipped_2 ..uj.pronouns["their"].. lang.equipped_3)
