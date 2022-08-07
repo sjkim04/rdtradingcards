@@ -29,7 +29,7 @@
 	"no_arguments": "Sorry, but the c!equip command expects 1 argument. Please see c!help for more details.",
 	
 	
-	"interaction_not_cooldown": "An error has occured. Please make sure that you didn't recently equip another item!"
+	"reaction_not_cooldown": "An error has occured. Please make sure that you didn't recently equip another item!"
 	"stopped_1": "has successfully stopped the changing of ",
 	"stopped_2": " equipped item."
 }
