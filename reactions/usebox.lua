@@ -1,7 +1,9 @@
+
 local reaction = {}
 function reaction.run(message, interaction, data, response)
   local ujf = "savedata/" .. message.author.id .. ".json"
   local uj = dpf.loadjson(ujf, defaultjson)
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/box.json", "")
   local wj = dpf.loadjson("savedata/worldsave.json", defaultworldsave)
   local time = sw:getTime()
   print("Loaded uj")
@@ -10,12 +12,12 @@ function reaction.run(message, interaction, data, response)
     print('user1 has accepted')
     local cooldown = (uj.equipped == "stainedgloves") and 8 or 11.5
     if uj.lastbox + cooldown > time:toHours() then
-      interaction:reply("An error has occurred. Please make sure that you didn't recently use the box!")
+      interaction:reply(lang.reaction_not_cooldown)
       return
     end
 
     if not next(uj.inventory) then
-      interaction:reply("An error has occured. Please make sure that you still have a card in your inventory!")
+      interaction:reply(lang.reaction_no_card)
       return
     end
 
@@ -37,8 +39,12 @@ function reaction.run(message, interaction, data, response)
     
     wj.boxpool[boxpoolindex] = givecard
     
-    interaction:reply('<@' .. uj.id .. '> grabs a **' .. cdb[givecard].name .. '** card from '..uj.pronouns["their"]..' inventory and places it inside the box. As it goes in, a **' .. cdb[getcard].name .. '** card shows up in '..uj.pronouns["their"]..' pocket! The shorthand form of this card is **' .. getcard .. '**.')
-
+    if uj.lang == "ko" then
+      message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. lang.boxed_message_4 .. cdb[getcard].name .. lang.boxed_message_5 .. lang.boxed_message_6 .. getcard .. lang.boxed_message_7)
+	else
+	  message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. uj.pronouns["their"] .. lang.boxed_message_4 .. cdb[getcard].name .. lang.boxed_message_5 .. uj.pronouns["their"] .. lang.boxed_message_6 .. getcard .. lang.boxed_message_7)
+	end
+	
         if not uj.storage[getcard] then
             if not uj.checkcard then
                 message.channel:send('You do not have the **' .. cdb[getcard].name .. '** card in your storage!')
@@ -62,7 +68,7 @@ function reaction.run(message, interaction, data, response)
 
   if response == "no" then
     print('user1 has denied')
-    interaction:reply("You decide to not put a **Trading Card** in the **Peculiar Box**.")
+    interaction:reply(lang.reaction_stopped)
   end
 end
 return reaction

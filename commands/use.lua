@@ -182,6 +182,7 @@ function command.run(message, mt,bypass)
         }}
       end
     elseif request == "peculiar box" or request == "box" or request == "peculiarbox" then 
+	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/box.json", "")
       if not uj.lastbox then 
         uj.lastbox = -24
       end
@@ -190,23 +191,27 @@ function command.run(message, mt,bypass)
         local minutesleft = math.ceil(uj.lastbox * 60 - time:toMinutes() + cooldown * 60)
         local durationtext = ""
         if math.floor(minutesleft / 60) > 0 then
-          durationtext = math.floor(minutesleft / 60) .. " hour"
-          if math.floor(minutesleft / 60) ~= 1 then durationtext = durationtext .. "s" end
+          durationtext = math.floor(minutesleft / 60) .. lang.time_hour
+		  if lang.needs_plural_s == true then
+            if math.floor(minutesleft / 60) ~= 1 then durationtext = durationtext .. lang.time_plural_s end
+		  end
         end
         if minutesleft % 60 > 0 then
-          if durationtext ~= "" then durationtext = durationtext .. " and " end
-          durationtext = durationtext .. minutesleft % 60 .. " minute"
-          if minutesleft % 60 ~= 1 then durationtext = durationtext .. "s" end
+          if durationtext ~= "" then durationtext = durationtext .. lang.time_and end
+          durationtext = durationtext .. minutesleft % 60 .. lang.time_minute
+		  if lang.needs_plural_s == true then
+            if minutesleft % 60 ~= 1 then durationtext = durationtext .. lang.time_plural_s end
+		  end
         end
-        message.channel:send('Please wait ' .. durationtext .. ' before using the box again.')
+        message.channel:send(lang.wait_message_1 .. durationtext .. lang.wait_message_2)
         return
       end
 
       if not next(uj.inventory) then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Using Peculiar Box...",
-          description = 'You do not have any cards to put into the **Peculiar Box**.',
+          title = lang.embed_title,
+          description = lang.embed_no_card,
         }}
         return
       end
@@ -214,9 +219,9 @@ function command.run(message, mt,bypass)
       if not uj.skipprompts then
         ynbuttons(message,{
           color = 0x85c5ff,
-          title = "Using Peculiar Box...",
-          description = message.author.mentionString .. ', will you put a random **Trading Card** from your inventory in the **Peculiar Box?**.',
-        },"usebox",{})
+          title = lang.embed_title,
+          description = message.author.mentionString .. lang.confirm_message,
+        },"usebox",{}, uj.id, uj.lang)
         return
       else
         local iptable = {}
@@ -238,7 +243,11 @@ function command.run(message, mt,bypass)
         
         wj.boxpool[boxpoolindex] = givecard
         
-        message.channel:send('<@' .. uj.id .. '> grabs a **' .. cdb[givecard].name .. '** card from '..uj.pronouns["their"]..' inventory and places it inside the box. As it goes in, a **' .. cdb[getcard].name .. '** card shows up in '..uj.pronouns["their"]..' pocket! The shorthand form of this card is **' .. getcard .. '**.')
+		if uj.lang == "ko" then
+          message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. lang.boxed_message_4 .. cdb[getcard].name .. lang.boxed_message_5 .. lang.boxed_message_6 .. getcard .. lang.boxed_message_7)
+		else
+		  message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. uj.pronouns["their"] .. lang.boxed_message_4 .. cdb[getcard].name .. lang.boxed_message_5 .. uj.pronouns["their"] .. lang.boxed_message_6 .. getcard .. lang.boxed_message_7)
+		end
 
         if not uj.storage[getcard] then
             if not uj.checkcard then
