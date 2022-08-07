@@ -39,11 +39,12 @@ function command.run(message, mt)
     
     
     if string.lower(mt[1]) == "pyrowmid" or mt[1] == "" then -----------------PYROWMID--------------------------
+	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/look/pyrowmid.json", "")
       if wj.ws < 501 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'The **Pyrowmid** has recently opened itself, revealing a **Panda** and a **Strange Machine** inside. The walls are made of Rows (Rare) cards.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_pre_501,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/829255814169493535/pyr7.png'
           }
@@ -51,8 +52,8 @@ function command.run(message, mt)
       elseif wj.ws == 501 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A very small **Hole** has appeared next to the **Pyrowmid**. The **Panda** is looking at it with a worried look on his face. The **Strange Machine** continues to be strange.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_501,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831189023426478170/pyrhole.png'
           }
@@ -60,8 +61,8 @@ function command.run(message, mt)
       elseif wj.ws == 502 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A small **Hole** has appeared next to the **Pyrowmid**. The **Panda** is looking at it with a worried look on his face. The **Strange Machine** continues to be strange.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_502,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831191711917146183/pyrhole2.png'
           }
@@ -69,8 +70,8 @@ function command.run(message, mt)
       elseif wj.ws == 503 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A **Hole** has appeared next to the **Pyrowmid**. The **Panda** is looking at it with a very worried look on his face. The **Strange Machine** seems normal in comparison to all this.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_503,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831192398524710982/pyrhole3.png'
           }
@@ -78,8 +79,8 @@ function command.run(message, mt)
       elseif wj.ws == 504 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A somewhat large **Hole** has appeared next to the **Pyrowmid**. The **Panda** is looking at it with a very worried look on his face. The **Strange Machine** seems normal in comparison to all this.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_504,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831263091470630922/pyrhole4.png'
           }
@@ -87,8 +88,8 @@ function command.run(message, mt)
       elseif wj.ws == 505 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A large **Hole** has appeared next to the **Pyrowmid**. The **Panda** is looking at it with an extremely worried look on his face. The **Strange Machine** is making a strange noise.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_505,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831223296112066560/pyrhole5.png'
           }
@@ -96,8 +97,8 @@ function command.run(message, mt)
       elseif wj.ws == 506 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A very large **Hole** has appeared next to the **Pyrowmid**. It looks large enough to go in, but you have no way of doing so. The **Panda** is looking at it with an extremely worried look on his face. The **Strange Machine** is vibrating intensely.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_506,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831225534834802769/pyrhole6.png'
           }
@@ -105,8 +106,8 @@ function command.run(message, mt)
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Pyrowmid...",
-          description = 'A very large **Hole** has appeared next to the **Pyrowmid**. If you **Used** the ladder propped up inside it, you could probably climb down it. The **Panda** is looking at it with a worried look on his face. The **Strange Machine** is being strange.',
+          title = lang.looking_at_pyrowmid,
+          description = lang.looking_507,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831291533915324436/pyrholefinal.png'
           }
@@ -118,27 +119,27 @@ function command.run(message, mt)
       
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Panda...",
-          description = 'The **Panda** looks confused, and probably would rather not be here in the **Pyrowmid**. That **Throne** he is sitting on sure does look comfortable, though.',
+          title = lang.looking_at_panda,
+          description = lang.looking_panda,
         }}
     elseif string.lower(mt[1]) == "throne" then 
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Throne...",
-          description = 'The **Throne**, like the walls of the **Pyrowmid** are made of Rows (Rare) cards. It is unknown how it is being held together.',
+          title = lang.looking_at_throne,
+          description = lang.looking_throne,
         }}
     elseif string.lower(mt[1]) == "strange machine" or string.lower(mt[1]) == "machine" then 
       if wj.ws == 506 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Strange Machine...",
-          description = 'The **Strange Machine** appears to have a slot for four **Tokens**, and a crank. The crank is worn, as if it has been **Used** many times. The machine is shaking vigorously.',
+          title = lang_looking_at_machine,
+          description = lang.looking_machine_506,
         }}       
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Strange Machine...",
-          description = 'The **Strange Machine** appears to have a slot for three **Tokens**, and a crank. The crank is worn, as if it has been **Used** many times.',
+          title = lang_looking_at_machine,
+          description = lang.looking_machine,
         }}
       end
     
@@ -146,14 +147,14 @@ function command.run(message, mt)
       if wj.ws < 501 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'what hole?',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_pre_501,
         }}
       elseif wj.ws == 501 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A very small **Hole** has appeared next to the **Pyrowmid**. A **Token** could probably fit in it, but just barely.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_501,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507279975153754/holeclose.png'
           }
@@ -161,8 +162,8 @@ function command.run(message, mt)
       elseif wj.ws == 502 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A small **Hole** has appeared next to the **Pyrowmid**. A **Token** would definitely fit in.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_502,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507280905633812/holeclose2.png'
           }
@@ -170,8 +171,8 @@ function command.run(message, mt)
       elseif wj.ws == 503 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A **Hole** has appeared next to the **Pyrowmid**. It craves more **Tokens**.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_503,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507281941495948/holeclose3.png'
           }
@@ -179,8 +180,8 @@ function command.run(message, mt)
       elseif wj.ws == 504 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A somewhat large **Hole** has appeared next to the **Pyrowmid**. It craves yet more **Tokens**.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_504,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507283624198174/holeclose4.png'
           }
@@ -188,8 +189,8 @@ function command.run(message, mt)
       elseif wj.ws == 505 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A large **Hole** has appeared next to the **Pyrowmid**. It is vibrating very slightly from its proximity to the **Strange Machine**.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_505,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507285242150922/holeclose5.png'
           }
@@ -197,8 +198,8 @@ function command.run(message, mt)
       elseif wj.ws == 506 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A very large **Hole** has appeared next to the **Pyrowmid**. It looks large enough to go in, but you have no way of doing so. It is vibrating intensely from its proximity to the **Strange Machine**.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_506,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507288165449728/holeclose6.png'
           }
@@ -206,8 +207,8 @@ function command.run(message, mt)
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Hole...",
-          description = 'A very large **Hole** has appeared next to the **Pyrowmid**. If you **Used** the ladder propped up inside it, you could probably climb down it.',
+          title = lang.looking_at_hole,
+          description = lang.looking_hole_507,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507279164997642/holeclosefinal.png'
           }
@@ -216,8 +217,8 @@ function command.run(message, mt)
     elseif (string.lower(mt[1]) == "ladder") and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Ladder...",
-        description = 'The **Ladder** feels too big to fit in a capsule, but that\'s where it came from. It is currently propped up in the **Hole**.',
+        title = lang.looking_at_ladder,
+        description = lang.looking_ladder,
         image = {
           url = 'https://cdn.discordapp.com/attachments/829197797789532181/831507279164997642/holeclosefinal.png'
         }
@@ -370,7 +371,7 @@ function command.run(message, mt)
     elseif (string.lower(mt[1]) == "pyrowmid")  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Pyrowmid...",
+        title = lang.looking_at_pyrowmid,
         description = 'From up here, the **Pyrowmid** looks absolutely tiny! Next to it is an absolutely bog-standard pyramid.',
       }}
     elseif (string.lower(mt[1]) == "bridge")  then 
