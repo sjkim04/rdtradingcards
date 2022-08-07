@@ -82,16 +82,21 @@ function command.run(message, mt)
       ynbuttons(message,lang.prompt_1 .. itemdb[uj.equipped].name .. lang.prompt_2 .. itemdb[curfilename].name .. lang.prompt_3,"equip",{newequip = curfilename}, uj.id, uj.lang)
     else
       uj.equipped = curfilename
-      message.channel:send("<@" .. uj.id .. "> " .. lang.equipped_1 .. itemdb[curfilename].name .. lang.equipped_2 ..uj.pronouns["their"].. lang.equipped_3)
-      uj.lastequip = time:toHours()
-      dpf.savejson(ujf,uj)
-      print('saved equipped as ' .. curfilename)
-
-      if uj.sodapt and uj.sodapt.equip then
+	  if uj.lang == ko then
+	    message.channel:send("<@" .. uj.id .. "> " .. lang.equipped_1 .. itemdb[curfilename].name .. lang.equipped_2 .. lang.equipped_3)
+      else
+	    message.channel:send("<@" .. uj.id .. "> " .. lang.equipped_1 .. itemdb[curfilename].name .. lang.equipped_2 ..uj.pronouns["their"].. lang.equipped_3)
+	  end
+	  uj.lastequip = time:toHours()
+	  
+	  if uj.sodapt and uj.sodapt.equip then
         uj.lastequip = uj.lastequip + uj.sodapt.equip
         uj.sodapt.equip = nil
         if uj.sodapt == {} then uj.sodapt = nil end
       end
+	  
+      dpf.savejson(ujf,uj)
+      print('saved equipped as ' .. curfilename)
     end
           
   else
