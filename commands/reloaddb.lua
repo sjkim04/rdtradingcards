@@ -516,8 +516,9 @@ function command.run(message, mt, overwrite)
       end
     end
 
-    _G['ynbuttons'] = function(message, content, etype, data, userid)
+    _G['ynbuttons'] = function(message, content, etype, data, userid, lang)
       local messagecontent, messageembed
+	  local langfile = dpf.loadjson("langs/" .. lang .. "/ynbuttons.json", "")
 
       if type(content) == "table" then
         messageembed = content
@@ -528,14 +529,14 @@ function command.run(message, mt, overwrite)
       print('making yesbutton')
       local yesbutton = discordia.Button {
         id = "yes",
-        label = "Yes",
+        label = langfile.button_yes,
         style = "success"
       }
       
       print("making nobutton")
       local nobutton = discordia.Button {
         id = "no",
-        label = "No",
+        label = langfile.button_no,
         style = "danger"
       }
 
@@ -550,7 +551,9 @@ function command.run(message, mt, overwrite)
         local reactionid = userid or message.author.id
 
         if interaction.user.id ~= reactionid then
-          interaction:reply("Sorry, but you cannot react to this button!", true)
+		  local uj2 = dpf.loadjson("savedata/" .. interaction.user.id .. ".json", defaultjson)
+		  local langfile2 = dpf.loadjson("langs/" .. uj2.lang .. "/ynbuttons.json", "")
+          interaction:reply(langfile2.cannot_interact, true)
         end
 
         return interaction.user.id == reactionid
