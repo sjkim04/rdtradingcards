@@ -30,16 +30,16 @@ function pronoun.getPronoun(lang,sel,pro)
 		end
 	elseif sel == "she" then
 		if pro == "they" then
-			_G['value'] = langfile.he_they
+			_G['value'] = langfile.she_they
 		elseif pro == "them" then
-			_G['value'] = langfile.he_them
+			_G['value'] = langfile.she_them
 		elseif pro == "their" then
 			print("setting _G['value']")
-			_G['value'] = langfile.he_their
+			_G['value'] = langfile.she_their
 		elseif pro == "theirs" then
-			_G['value'] = langfile.he_theirs
+			_G['value'] = langfile.she_theirs
 		elseif pro == "theirself" then
-			_G['value'] = langfile.he_theirself
+			_G['value'] = langfile.she_theirself
 		end
 	elseif sel == "it" then
 		if pro == "they" then
