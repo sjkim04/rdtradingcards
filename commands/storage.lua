@@ -2,6 +2,7 @@ local command = {}
 function command.run(message, mt)
   print(message.author.name .. " did !storage")
   local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json",defaultjson)
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/storage.json", "")
   
   local enableShortNames = false
 
@@ -43,17 +44,32 @@ function command.run(message, mt)
     if storagetable[i] then storagestring = storagestring .. storagetable[i] end
   end
 
-  message.channel:send{
-    content = message.author.mentionString .. ", your storage contains:",
+  if uj.lang == "ko" then
+    message.channel:send{
+    content = message.author.mentionString .. lang.embed_storage,
     embed = {
       color = 0x85c5ff,
-      title = message.author.name .. "'s Storage",
+      title = message.author.name .. lang.embed_title,
       description = storagestring,
       footer = {
-        text =  "(Page " .. pagenumber .. " of " .. maxpn .. ")",
+        text =  lang.embed_page_1 .. maxpn .. lang.embed_page_2 .. pagenumber .. lang.embed_page_3,
         icon_url = message.author.avatarURL
       }
     }
   }
+  else
+    message.channel:send{
+    content = message.author.mentionString .. lang.embed_storage,
+    embed = {
+      color = 0x85c5ff,
+      title = message.author.name .. lang.embed_title,
+      description = storagestring,
+      footer = {
+        text =  lang.embed_page_1 .. pagenumber .. lang.embed_page_2 .. maxpn .. lang.embed_page_3,
+        icon_url = message.author.avatarURL
+      }
+    }
+  }
+  end
 end
 return command
