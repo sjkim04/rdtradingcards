@@ -3,6 +3,12 @@
 	"looking_lab_post_801": "The **Abandoned Lab** was revealed after a **Hole** appeared next to the **Pyrowmid**. Judging by the presence of a **Spider Web**, it has not been used for quite some time, but the technology here looks relatively modern. The **Database** and the connected **Terminal** juxtapose the cheery **Cat Poster**, which was recently moved to reveal the **Scanner**. The **Table** on the other side of the room is caked in dust.",
 	"looking_lab": "The **Abandoned Lab** was revealed after a **Hole** appeared next to the **Pyrowmid**. Judging by the presence of a **Spider Web**, it has not been used for quite some time, but the technology here looks relatively modern. The **Database** and the connected **Terminal** juxtapose the cheery **Cat Poster**. The **Table** on the other side of the room is caked in dust.",
 
+	"spider_alert": "Are you okay with seeing a spider?",
+	"looking_at_spider": "Looking at Spider...",
+	"looking_spider": "It's a spider! How cute!",
+	"looking_at_spiderweb": "Looking at Spiderweb...",
+	"looking_spider_nospider": "There is a **Spiderweb** here, but there is no **Spider**. There never **was** and there never **will** be a **Spider** in this location.",
+
 	"looking_at_terminal": "Looking at Terminal...",
 	"looking_terminal_pre_508": "The monitor of the **Terminal** is currently on. It is asking for a password.",
 	"looking_terminal": "The monitor of the **Terminal** is currently on. A command prompt is freely available.",
@@ -12,4 +18,10 @@
 	
 	"looking_at_table": "Looking at Table...",
 	"looking_table": "The dusty **Table** has a **Peculiar Box** on it, emitting a soft hum. Underneath the table is a **Mouse Hole**, with a sign reading \"I.T.\" above it.",
+	
+	"looking_at_mousehole": "Looking at Mouse Hole...",
+	"looking_mousehole": "The **Mouse Hole** is directly underneath a yellow sign that says \"I.T.\". The hole is just about wide enough to fit a computer mouse into.",
+	
+	"looking_at_box": "Looking at Peculiar Box...",
+	"looking_box": "The **Peculiar Box** rests on top of the **Table**. The opening on the top of it almost beckons for a **Trading Card** to be placed inside.",
 }
