@@ -254,7 +254,7 @@ function command.run(message, mt)
       wj.lablookindex = wj.lablookindex % string.len(wj.lablooktext)
       dpf.savejson("savedata/worldsave.json", wj)
     elseif (string.lower(mt[1]) == "spider" or string.lower(mt[1]) == "spiderweb" or string.lower(mt[1]) == "web" or string.lower(mt[1]) == "spider web") and wj.labdiscovered then       
-      local newmessage = ynbuttons(message,'Are you okay with seeing a spider?',"spiderlook",{},uj.id,uj.lang)
+      local newmessage = ynbuttons(message,lang.spider_alert,"spiderlook",{},uj.id,uj.lang)
     elseif (string.lower(mt[1]) == "terminal") and wj.labdiscovered  then  --FONT IS MS GOTHIC AT 24PX, 8PX FOR SMALL FONT
       if wj.ws < 508 then
         message.channel:send{embed = {
@@ -326,14 +326,14 @@ function command.run(message, mt)
     elseif (string.lower(mt[1]) == "mouse hole" or string.lower(mt[1]) == "mouse" or string.lower(mt[1]) == "mousehole") and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Mouse Hole...",
-        description = 'The **Mouse Hole** is directly underneath a yellow sign that says "I.T.". The hole is just about wide enough to fit a computer mouse into.',
+        title = lang.looking_at_mousehole,
+        description = lang.looking_mousehole,
       }}
     elseif (string.lower(mt[1]) == "peculiar box" or string.lower(mt[1]) == "box" or string.lower(mt[1]) == "peculiarbox") and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Peculiar Box...",
-        description = 'The **Peculiar Box** rests on top of the **Table**. The opening on the top of it almost beckons for a **Trading Card** to be placed inside.',
+        title = lang.looking_at_box,
+        description = lang.looking_box,
       }}
     elseif (string.lower(mt[1]) == "scanner") and wj.ws >= 802 then
       message.channel:send{embed = {
