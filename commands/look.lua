@@ -229,20 +229,21 @@ function command.run(message, mt)
   end -------------------------------------END PYROWMID------------------------------------------------
   
   if uj.room == 1 then     --------------------------------------------------LAB--------------------------------------------------------------------------   
-    
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/look/lab.json", "")
+	  
       
     
     if (string.lower(mt[1]) == "lab" or string.lower(mt[1]) == "abandoned lab" or mt[1] == "") and wj.labdiscovered  then 
       local laburl = "https://cdn.discordapp.com/attachments/829197797789532181/862885457854726154/lab_scanner.png"
-      local labdesc = 'The **Abandoned Lab** was revealed after a **Hole** appeared next to the **Pyrowmid**. Judging by the presence of a **Spider Web**, it has not been used for quite some time, but the technology here looks relatively modern. The **Database** and the connected **Terminal** juxtapose the cheery **Cat Poster**, which was recently moved to reveal the **Scanner**. The **Table** on the other side of the room is caked in dust.'
+      local labdesc = lang.looking_lab_post_801
       
       if wj.ws <= 801 then
         laburl = labimages[getletterindex(string.sub(wj.lablooktext, wj.lablookindex + 1, wj.lablookindex + 1))]
-        labdesc = 'The **Abandoned Lab** was revealed after a **Hole** appeared next to the **Pyrowmid**. Judging by the presence of a **Spider Web**, it has not been used for quite some time, but the technology here looks relatively modern. The **Database** and the connected **Terminal** juxtapose the cheery **Cat Poster**. The **Table** on the other side of the room is caked in dust.'
+        labdesc = lang.looking_lab
       end
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Lab...",
+        title = lang.looking_at_lab,
         description = labdesc,
         image = {
           url = laburl
@@ -253,13 +254,13 @@ function command.run(message, mt)
       wj.lablookindex = wj.lablookindex % string.len(wj.lablooktext)
       dpf.savejson("savedata/worldsave.json", wj)
     elseif (string.lower(mt[1]) == "spider" or string.lower(mt[1]) == "spiderweb" or string.lower(mt[1]) == "web" or string.lower(mt[1]) == "spider web") and wj.labdiscovered then       
-      local newmessage = ynbuttons(message,'Are you okay with seeing a spider?',"spiderlook",{})
+      local newmessage = ynbuttons(message,'Are you okay with seeing a spider?',"spiderlook",{},uj.id,uj.lang)
     elseif (string.lower(mt[1]) == "terminal") and wj.labdiscovered  then  --FONT IS MS GOTHIC AT 24PX, 8PX FOR SMALL FONT
       if wj.ws < 508 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Terminal...",
-          description = 'The monitor of the **Terminal** is currently on. It is asking for a password.',
+          title = lang.looking_at_terminal,
+          description = lang.looking_terminal_pre_508,
           image = {
             url = "https://cdn.discordapp.com/attachments/829197797789532181/838832581147361310/terminal1.png"
           }
@@ -267,8 +268,8 @@ function command.run(message, mt)
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Looking at Terminal...",
-          description = 'The monitor of the **Terminal** is currently on. A command prompt is freely available.',
+          title = lang.looking_at_terminal,
+          description = lang.looking_terminal,
           image = {
             url = "https://cdn.discordapp.com/attachments/829197797789532181/838836625391484979/terminal2.gif"
           }
@@ -278,8 +279,8 @@ function command.run(message, mt)
     elseif (string.lower(mt[1]) == "database") and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Database...",
-        description = 'The **Database** towers over you, its lights constantly flashing. What could they mean?',
+        title = lang.looking_at_database,
+        description = lang.looking_database,
         image = {
           url = labimages[getletterindex(string.sub(wj.lablooktext, wj.lablookindex + 1, wj.lablookindex + 1))]
         }
@@ -292,8 +293,8 @@ function command.run(message, mt)
     elseif (string.lower(mt[1]) == "table") and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Table...",
-        description = 'The dusty **Table** has a **Peculiar Box** on it, emitting a soft hum. Underneath the table is a **Mouse Hole**, with a sign reading "I.T." above it.',
+        title = lang.looking_at_table,
+        description = lang.looking_table,
       }}
     
     
