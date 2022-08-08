@@ -47,7 +47,7 @@ function reaction.run(message, interaction, data, response)
 	
         if not uj.storage[getcard] then
             if not uj.checkcard then
-                message.channel:send('You do not have the **' .. cdb[getcard].name .. '** card in your storage!')
+                message.channel:send(lang.not_in_storage_1 .. cdb[getcard].name .. lang.not_in_storage_2)
             end
         end
     uj.timesusedbox = uj.timesusedbox and uj.timesusedbox + 1 or 1

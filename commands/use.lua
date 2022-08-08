@@ -46,7 +46,7 @@ function command.run(message, mt,bypass)
             color = 0x85c5ff,
             title = "Using Strange Machine...",
             description = 'Will you put three **Tokens** into the **Strange Machine?** (tokens remaining: ' .. uj.tokens .. ')',
-          },"usemachine",{})
+          },"usemachine",{}, uj.id, uj.lang)
           return
         else
           local newitem = itempt[math.random(#itempt)]
@@ -251,7 +251,7 @@ function command.run(message, mt,bypass)
 
         if not uj.storage[getcard] then
             if not uj.checkcard then
-                message.channel:send('You do not have the **' .. cdb[getcard].name .. '** card in your storage!')
+                message.channel:send(lang.not_in_storage_1 .. cdb[getcard].name .. lang.not_in_storage_1)
             end
         end
         uj.timesusedbox = uj.timesusedbox and uj.timesusedbox + 1 or 1
