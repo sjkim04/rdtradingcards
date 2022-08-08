@@ -1,10 +1,10 @@
 {
 	"locations_pyrowmid": "행라미드",
 	"locations_lab": "버려진 연구소",
-	"locations_mountains": "Windy Mountains",
-	"locations_shop": "Quaint Shop",
-	"locations_hallway": "Dark Hallway",
-	"locations_casino": "Shady Casino",
+	"locations_mountains": "바람부는 산",
+	"locations_shop": "진기한 가게",
+	"locations_hallway": "어두운 복도",
+	"locations_casino": "그늘진 카지노",
 	
 	"already_in_1": "이미 **",
 	"already_in_2": "**에 있습니다!",
@@ -12,6 +12,6 @@
 	"room_changed_1": "당신은 **",
 	"room_changed_2": "**로 이동합니다.",
 	
-	"no_room_1": "Sorry, but I could not find ",
-	"no_room_2": ". Make sure that you spelled it right!",
+	"no_room_1": "죄송하지만, ",
+	"no_room_2": "를 찾을 수 없었습니다. 철자가 맞는지 확인해 주세요!!",
 }
