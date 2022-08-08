@@ -652,6 +652,7 @@ function command.run(message, mt, overwrite)
     addcommand("piss",cmd.use,0,{"terminal", "piss"},true)
 	addcommand("language",cmd.language)
 	addcommand("lang",cmd.language)
+	addcommand("langlist",cmd.langlist)
     _G['handlemessage'] = function (message, content)
 	local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
 		if not uj.lang then

@@ -1,6 +1,6 @@
 local command = {}
 function command.run(message, mt)
-  print(message.author.name .. " did !pronoun")
+  print(message.author.name .. " did !language")
   local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
   local lang = dpf.loadjson("langs/" .. uj.lang .. "/lang.json", "")
   
@@ -8,7 +8,7 @@ function command.run(message, mt)
     uj.lang = "en"
   end
   
-  if mt[1] == "English" or mt[1] == "en" then
+  if mt[1] == "English" or mt[1] == "english" or mt[1] == "en" then
   uj.lang = "en"
   local lang = dpf.loadjson("langs/" .. uj.lang .. "/lang.json", "")
   local lang_p = dpf.loadjson("langs/" .. uj.lang .. "/pronoun.json", "")
@@ -62,7 +62,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang_p.vee_theirself
   end
   message.channel:send(lang.lang_changed)
-  elseif mt[1] == "한국어" or mt[1] == "Korean" or mt[1] == "ko" or mt[1] == "kr" then
+  elseif mt[1] == "한국어" or mt[1] == "Korean" or mt[1] == "korean" or mt[1] == "ko" or mt[1] == "kr" then
     uj.lang = "ko"
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/lang.json", "")
 	local lang_p = dpf.loadjson("langs/" .. uj.lang .. "/pronoun.json", "")
