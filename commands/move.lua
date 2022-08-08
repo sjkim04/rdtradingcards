@@ -4,10 +4,11 @@ function command.run(message, mt)
 
   local wj = dpf.loadjson("savedata/worldsave.json", defaultworldsave)
   local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json",defaultjson)
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/move.json","")
   if not mt[1] then
     mt[1] = "pyrowmid"
   end
-  local locations = {"Pyrowmid", "Abandoned Lab", "Windy Mountains", "Quaint Shop", "Dark Hallway", "Shady Casino"}
+  local locations = {lang.locations_pyrowmid, lang.locations_lab, lang.locations_mountains, lang.locations_shop, lang.locations_hallway, lang.locations_casino}
   local success = false
   local request = string.lower(mt[1])
   local newroom = 0
@@ -43,16 +44,16 @@ function command.run(message, mt)
   if success then
     print("newroom is ".. newroom)
     if newroom == uj.room then
-      message.channel:send("You are already in the **" .. locations[newroom+1] .. "**!")
+      message.channel:send(lang.already_in_1 .. locations[newroom+1] .. lang.already_in_2)
       return
 	else
       uj.room = newroom
-      message.channel:send("Your location is now the **" .. locations[newroom+1] .. "**.")
+      message.channel:send(lang.room_changed_1 .. locations[newroom+1] .. lang.room_changed_2)
       dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
       return uj
 	end
   else
-    message.channel:send("Sorry, but I could not find " .. mt[1] .. ". Make sure that you spelled it right!")
+    message.channel:send(lang.no_room_1 .. mt[1] .. lang.no_room_2)
   end
 
 end
