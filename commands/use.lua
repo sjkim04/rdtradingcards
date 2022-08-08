@@ -452,6 +452,7 @@ o-''|\\_____/)
     end
   end
   if (uj.room == 3) then ----------------------------------------------------------SHOP
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop.json", "")
     if request == "shop" then
       checkforreload(time:toDays())
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
@@ -552,7 +553,7 @@ o-''|\\_____/)
           color = 0x85c5ff,
           title = "Buying " .. sname .. "...",
           description = "The description for this item reads: \n`".. consdb[srequest].description .."`\n<@" .. message.author.id .. ">, will you buy " .. numrequest .. " of them for "..sprice.." **Token" .. (sprice == 1 and "" or "s") .. "**?",
-        },"buy",{itemtype = "consumable",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=numrequest})
+        },"buy",{itemtype = "consumable",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=numrequest}, message.author.id, uj.lang)
         return
       end
 
@@ -596,7 +597,7 @@ o-''|\\_____/)
           color = 0x85c5ff,
           title = "Buying " .. sname .. "...",
           description = "The description for this item reads: \n`".. itemdb[srequest].description .."`\n<@" .. message.author.id .. ">, will you buy it for "..sprice.." **Tokens**?",
-        },"buy",{itemtype = "item",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=1})
+        },"buy",{itemtype = "item",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=1}, message.author.id, uj.lang)
         return
       end
 
@@ -639,7 +640,7 @@ o-''|\\_____/)
           color = 0x85c5ff,
           title = "Buying " .. sname .. "...",
           description = "The description for this card reads: \n`".. cdb[srequest].description .."`\n<@" .. message.author.id .. ">, will you buy " .. numrequest .. " of them for "..sprice.." **Token" .. (sprice == 1 and "" or "s") .."**?",
-        },"buy",{itemtype = "card",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=numrequest})
+        },"buy",{itemtype = "card",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=numrequest}, message.author.id, uj.lang)
         return
       end
 
