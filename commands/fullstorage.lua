@@ -33,7 +33,7 @@ function command.run(message, mt)
   for k in pairs(uj.storage) do numkey = numkey + 1 end
   
   local storetable = {}
-  local contentstring = (uj.id == message.author.id and lang.embed_your or "<@" .. uj.id .. ">" .. lang.embed_s) .. lang.embed_storage
+  local contentstring = (uj.id == message.author.id and lang.embed_your or "<@" .. uj.id .. ">" .. lang.embed_s) .. lang.embed_contains
   local titlestring = lang.embed_title
   local storestring = ''
   local prevstorestring = ''

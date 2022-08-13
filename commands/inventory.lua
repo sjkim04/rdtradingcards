@@ -51,7 +51,7 @@ function command.run(message, mt)
 
   if uj.lang == "ko" then
     message.channel:send{
-      content = message.author.mentionString .. lang.embed_inventory,
+      content = message.author.mentionString .. lang.embed_contains,
       embed = {
         color = 0x85c5ff,
         title = message.author.name .. lang.embed_title,
@@ -64,7 +64,7 @@ function command.run(message, mt)
     }
   else
     message.channel:send{
-      content = message.author.mentionString .. lang.embed_inventory,
+      content = message.author.mentionString .. lang.embed_contains,
       embed = {
         color = 0x85c5ff,
         title = message.author.name .. lang.embed_title,
