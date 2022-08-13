@@ -59,7 +59,7 @@ local time = sw:getTime()
   dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
 
   message.channel:send(lang.prayed_message)
-    if not uj.checktoken then
+  if not uj.togglechecktoken then
     message.channel:send('You currently have ' .. uj.tokens .. ' **Token' .. (uj.tokens == 1 and "" or "s") .. '**.')
   end
 end
