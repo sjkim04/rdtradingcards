@@ -128,7 +128,7 @@ function command.run(message, mt)
       end
 
     elseif (request == "spiderweb" or request == "spider web" or request == "web") and wj.smellable then
-      ynbuttons(message, 'Are you okay with smelling a spider?',"spidersmell",{})
+      ynbuttons(message, 'Are you okay with smelling a spider?',"spidersmell",{},uj.id,uj.lang)
     elseif hcsmells[request] then
       message.channel:send(hcsmells[request])
     elseif itemtexttofn(request) then
