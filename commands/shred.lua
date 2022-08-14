@@ -37,7 +37,7 @@ function command.run(message, mt)
   end
 
   if uj.inventory[curfilename] >= numcards then
-    ynbuttons(message, "<@" .. uj.id .. ">, do you want to shred your " .. numcards .. " **" .. cdb[curfilename].name .. "** card" .. (numcards == 1 and "" or "s") .. "? **This cannot be undone.** Click the Yes button to confirm and No to deny.", "shred", {curfilename = curfilename,numcards = numcards})
+    ynbuttons(message, "<@" .. uj.id .. ">, do you want to shred your " .. numcards .. " **" .. cdb[curfilename].name .. "** card" .. (numcards == 1 and "" or "s") .. "? **This cannot be undone.** Click the Yes button to confirm and No to deny.", "shred", {curfilename = curfilename,numcards = numcards}, uj.id, uj.lang)
   else
     message.channel:send("Sorry, but you do not have enough **" .. cdb[curfilename].name .. "** cards in your inventory.")
   end
