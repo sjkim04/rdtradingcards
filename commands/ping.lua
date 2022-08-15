@@ -2,7 +2,7 @@ local command = {}
 function command.run(message, mt)
   local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json",defaultjson)
   if uj.lang == "ko" then
-      local pingmessage = {"핑!", "퐁!", "팽!", "핀!"}
+      local pingmessage = {"퐁!", "뿅!", "뿡!", "팡!", "팝!", "삐용!", "삐슝!", "빠슝!", "파닥!"}
 	  local cping = math.random(1, #pingmessage)
 	  message.channel:send(pingmessage[cping])
   else
