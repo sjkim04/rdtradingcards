@@ -55,10 +55,14 @@ function command.run(message, mt)
   dpf.savejson("savedata/thrown.json", tj)
 
   local item = cardfilename and lang.card or lang.item
-  message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. lang.caught_2 .. caughtname .. "** " .. item .. lang.caught_3 .. uj.pronouns["their"] .. lang.caught_4)
+  if uj.lang == "ko" then
+    message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. lang.caught_2 .. caughtname .. "** " .. item .. lang.caught_3 .. lang.caught_4)
+  else
+    message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. lang.caught_2 .. caughtname .. "** " .. item .. lang.caught_3 .. uj.pronouns["their"] .. lang.caught_4)
+  end
   if not uj.togglecheckcard then
     if not uj.storage[caughtname] then
-      message.channel:send('You do not have the **' .. caughtname.. '** card in your storage!')
+      message.channel:send(lang.not_in_storage_1 .. caughtname .. lang.not_in_storage_2)
     end
   end
 end
