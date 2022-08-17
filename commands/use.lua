@@ -138,7 +138,7 @@ function command.run(message, mt,bypass)
   ----------------------------LAB------------------------
   if (uj.room == 1 or bypass) and wj.labdiscovered then
     if request == "spider" or request == "spiderweb" or request == "web" or request == "spider web" then       
-      ynbuttons(message, 'Are you okay with seeing a spider?',"spideruse",{})
+      ynbuttons(message, 'Are you okay with seeing a spider?',"spideruse",{},uj.id,uj.lang)
       return
     elseif request == "table" then 
       message.channel:send{embed = {
@@ -172,7 +172,7 @@ function command.run(message, mt,bypass)
           color = 0x85c5ff,
           title = "Using Mouse Hole...",
           description = message.author.mentionString .. ', do you want to put your **Broken Mouse** into the **Mouse Hole?**',
-        },"usemousehole",{})
+        },"usemousehole",{},uj.id,uj.lang)
         return
       else
         message.channel:send{embed = {
@@ -370,7 +370,7 @@ o-''|\\_____/)
                   text =  message.author.name,
                   icon_url = message.author.avatarURL
                 }
-              },"usehole",{})
+              },"usehole",{},uj.lang,uj.id)
               return
             else
               uj.tokens = uj.tokens - 1
@@ -695,7 +695,7 @@ o-''|\\_____/)
             color = 0x85c5ff,
             title = "Using " .. consdb[request].name .. "...",
             description = "Do you want to use your **" .. consdb[request].name .. "**? The item will be consumed in the process!",
-          },"useconsumable",{crequest=request,mt=mt})
+          },"useconsumable",{crequest=request,mt=mt},uj.id,uj.lang)
           return
         else
           local fn = request
