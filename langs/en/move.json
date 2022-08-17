@@ -1,4 +1,11 @@
 {
+	"request_pyrowmid": "",
+	"request_lab": "",
+	"request_mountains": "",
+	"request_shop": "",
+	"request_hallway": "",
+	"request_casino": "",
+
 	"locations_pyrowmid": "Pyrowmid",
 	"locations_lab": "Abandoned Lab",
 	"locations_mountains": "Windy Mountains",

@@ -20,22 +20,22 @@ function command.run(message, mt)
   --4: hallway
   --5: casino
   
-  if request == "pyrowmid" or request == "the pyrowmid" then
+  if request == "pyrowmid" or request == "the pyrowmid" or (uj.lang ~= "en" and request == lang.locations_pyrowmid) then
     success = true
     newroom = 0
-  elseif request == "lab" or request == "abandonedlab" or request == "the abandoned lab" or request == "abandoned lab" then
+  elseif request == "lab" or request == "abandonedlab" or request == "the abandoned lab" or request == "abandoned lab" or (uj.lang ~= "en" and request == lang.request_lab or request == lang.locations_lab) then
     success = true
     newroom = 1
-  elseif wj.ws >= 702 and (request == "mountains" or request == "mountain" or request == "windymountains" or request == "the windy mountains" or request == "windy mountains") then
+  elseif wj.ws >= 702 and (request == "mountains" or request == "mountain" or request == "windymountains" or request == "the windy mountains" or request == "windy mountains" or (uj.lang ~= "en" and request == lang.request_mountains or request == lang.locations_mountains)) then
     success = true
     newroom = 2
-  elseif wj.ws >= 702 and (request == "shop" or request == "quaintshop" or request == "quaint shop" or request == "the quaint shop") then
+  elseif wj.ws >= 702 and (request == "shop" or request == "quaintshop" or request == "quaint shop" or request == "the quaint shop" or (uj.lang ~= "en" and request == lang.request_shop or request == lang.locations_shop)) then
     success = true
     newroom = 3
-  elseif wj.ws >= 804 and (request == "hallway" or request == "darkhallway" or request == "the dark hallway" or request == "dark hallway") then
+  elseif wj.ws >= 804 and (request == "hallway" or request == "darkhallway" or request == "the dark hallway" or request == "dark hallway" or (uj.lang ~= "en" and request == lang.request_hallway or request == lang.locations_hallway)) then
     success = true
     newroom = 4
-  elseif wj.ws >= 805 and (request == "casino" or request == "shadycasino" or request == "the shady casino" or request == "shady casino") then
+  elseif wj.ws >= 805 and (request == "casino" or request == "shadycasino" or request == "the shady casino" or request == "shady casino" or (uj.lang ~= "en" and request == lang.request_casino or request == lang.locations_casino)) then
     success = true
     newroom = 5
   end

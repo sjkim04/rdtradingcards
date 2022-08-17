@@ -1,4 +1,11 @@
 {
+	"request_pyrowmid": "행라미드",
+	"request_lab": "연구소",
+	"request_mountains": "산",
+	"request_shop": "가게",
+	"request_hallway": "복도",
+	"request_casino": "카지노",
+	
 	"locations_pyrowmid": "행라미드",
 	"locations_lab": "버려진 연구소",
 	"locations_mountains": "바람부는 산",
