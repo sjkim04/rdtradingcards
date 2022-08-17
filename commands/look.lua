@@ -353,14 +353,14 @@ function command.run(message, mt)
   end
   
   if uj.room == 2 then     --------------------------------------------------MOUNTAINS--------------------------------------------------------------------------   
-    
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/look/mountains.json", "")
       
     local request = string.lower(mt[1]) --why tf didint i do this for all the other ones?????????????????
     if (request == "mountains" or request == "mountain" or request == "windymountains" or request == "the windy mountains" or request == "windy mountains" or mt[1] == "") then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Mountains...",
-        description = "The **Windy Mountains** can be found near the **Pyrowmid.** Across a **Bridge** is a **Quaint Shop**, which seems to have some **Barrels** next to it. The sky is filled with **Clouds.**",
+        title = lang.looking_at_mountains,
+        description = lang.looking_mountains,
         image = {
           url = "https://cdn.discordapp.com/attachments/829197797789532181/871433038280675348/windymountains.png"
         }
@@ -373,31 +373,31 @@ function command.run(message, mt)
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_pyrowmid,
-        description = 'From up here, the **Pyrowmid** looks absolutely tiny! Next to it is an absolutely bog-standard pyramid.',
+        description = lang.looking_pyrowmid,
       }}
     elseif (string.lower(mt[1]) == "bridge")  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Bridge...",
-        description = 'The **Bridge** looks safe to walk over, but you might not want to do any fancy jumps on it or anything.',
+        title = lang.looking_at_bridge,
+        description = lang.looking_bridge,
       }}
     elseif (request == "shop" or request == "quaintshop" or request == "quaint shop")  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Quaint Shop...",
-        description = 'The **Quaint Shop** has a sign outside of it, marking that it sells "Cards And Things". If you need cards and/or things, it might be worth checking out.',
+        title = lang.looking_at_shop,
+        description = lang.looking_shop,
       }}
     elseif (request == "barrels")  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Barrels...",
-        description = 'The **Barrels** are propped up next to the **Quaint Shop.** Probably best not to touch them...',
+        title = lang.looking_at_barrels,
+        description = lang.looking_barrels,
       }}
     elseif (request == "clouds")  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Clouds...",
-        description = 'Ooh! Pretty!',
+        title = lang.looking_at_clouds,
+        description = lang.looking_clouds,
       }}
     
     
@@ -439,7 +439,7 @@ function command.run(message, mt)
 	    if uj.lang == "ko" then
 		  _G['tokentext'] = lang.shop_token_1 .. v.price .. lang.shop_token_2
 		else
-		  _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price == 1 and "" or lang.needs_plural_s == true and lang.plural_s)
+		  _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
 		end
         if showShortHandForm == true then
           shopstr = shopstr .. "\n**"..cdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
@@ -453,7 +453,7 @@ function command.run(message, mt)
 	    if uj.lang == "ko" then
 		  _G['tokentext'] = lang.shop_token_1 .. v.price .. lang.shop_token_2
 		else
-		  _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price == 1 and "" or lang.needs_plural_s == true and lang.plural_s)
+		  _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
 		end
         if showShortHandForm == true then
           shopstr = shopstr .. "\n**"..consdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
@@ -465,9 +465,9 @@ function command.run(message, mt)
 
       if showShortHandForm == true then
 	    if uj.lang == "ko" then
-		  _G['tokentext'] = lang.shop_token_1 .. sj.price .. lang.shop_token_2
+		  _G['tokentext'] = lang.shop_token_1 .. sj.itemprice .. lang.shop_token_2
 		else
-		  _G['tokentext'] = sj.itemprice .. lang.shop_token .. (sj.itemprice == 1 and "" or lang.needs_plural_s == true and lang.plural_s)
+		  _G['tokentext'] = sj.itemprice .. lang.shop_token_1 .. (sj.itemprice ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
 		end
         shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock.." | ("..sj.item..")"
       else
