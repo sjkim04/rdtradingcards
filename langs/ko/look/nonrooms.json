@@ -1,7 +1,7 @@
 {
 	"request_factory_1": "공장",
 	"request_factory_2": "카드 공장",
-	"looking_factory": ":eye:`카드 공장이 뒤돌아 본다`:eye:",
+	"looking_factory": ":eye:`카드 공장이 지켜보고 있다`:eye:",
 	
 	"request_token": "토큰",
 	"looking_at_token": "토큰을 보니...",
