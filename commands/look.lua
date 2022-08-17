@@ -471,6 +471,11 @@ function command.run(message, mt)
 		end
         shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock.." | ("..sj.item..")"
       else
+	    if uj.lang == "ko" then
+		  _G['tokentext'] = lang.shop_token_1 .. sj.itemprice .. lang.shop_token_2
+		else
+		  _G['tokentext'] = sj.itemprice .. lang.shop_token_1 .. (sj.itemprice ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
+		end
         shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock
       end
 
