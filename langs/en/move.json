@@ -11,6 +11,7 @@
 	
 	"room_changed_1": "Your location is now the **",
 	"room_changed_2": "**.",
+	"room_changed_3": "",
 	
 	"no_room_1": "Sorry, but I could not find ",
 	"no_room_2": ". Make sure that you spelled it right!",

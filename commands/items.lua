@@ -42,7 +42,7 @@ function command.run(message, mt)
   end
 
   if not uj.tokens then uj.tokens = 0 end
-  invstring = invstring .. '\nYou also have ' .. uj.tokens .. ' **Token' .. (uj.tokens == 1 and "" or "s") .. '**.'
+  invstring = invstring .. "\n" .. lang.embed_token_1 .. uj.tokens .. lang.embed_token_2 .. (uj.tokens ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.embed_token_3
 
 
   if uj.lang == "ko" then
