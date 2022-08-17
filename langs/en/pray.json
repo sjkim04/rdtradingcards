@@ -11,4 +11,7 @@
 	"wait_message_2": " before praying again.",
 	
 	"prayed_message": "The Card Gods have listened to your plight. A **Token** appears in your pocket.",
+	"checktoken_1": "You currently have ",
+	"checktoken_2": " **Token",
+	"checktoken_3": "**.",
 }

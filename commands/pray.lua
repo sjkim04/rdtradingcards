@@ -60,7 +60,7 @@ local time = sw:getTime()
 
   message.channel:send(lang.prayed_message)
   if not uj.togglechecktoken then
-    message.channel:send('You currently have ' .. uj.tokens .. ' **Token' .. (uj.tokens == 1 and "" or "s") .. '**.')
+    message.channel:send(lang.checktoken_1 .. uj.tokens .. lang.checktoken_2 .. (uj.tokens ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.checktoken_3)
   end
 end
 return command

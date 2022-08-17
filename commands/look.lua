@@ -406,7 +406,8 @@ function command.run(message, mt)
     end
   end
   
-  if uj.room == 3 then     --------------------------------------------------SHOP--------------------------------------------------------------------------   
+  if uj.room == 3 then  --------------------------------------------------SHOP--------------------------------------------------------------------------   
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/look/shop.json")
     args = {}
     for substring in mt[1]:gmatch("%S+") do
       table.insert(args, substring)
@@ -435,42 +436,57 @@ function command.run(message, mt)
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
       local shopstr = ""
       for i,v in ipairs(sj.cards) do
+	    if uj.lang == "ko" then
+		  _G['tokentext'] = lang.shop_token_1 .. v.price .. lang.shop_token_2
+		else
+		  _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price == 1 and "" or lang.needs_plural_s == true and lang.plural_s)
+		end
         if showShortHandForm == true then
-          shopstr = shopstr .. "\n**"..cdb[v.name].name.."** ("..v.price.." token" .. (v.price == 1 and "" or "s") .. ") x"..v.stock .. " | ("..v.name..")"
+          shopstr = shopstr .. "\n**"..cdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
         elseif showSeasons == true then
-          shopstr = shopstr .. "\n**"..cdb[v.name].name.."** ("..v.price.." token" .. (v.price == 1 and "" or "s") .. ") x"..v.stock .. " | (Season "..cdb[v.name].season..")"
+          shopstr = shopstr .. "\n**"..cdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | (Season "..cdb[v.name].season..")"
         else
-          shopstr = shopstr .. "\n**"..cdb[v.name].name.."** ("..v.price.." token" .. (v.price == 1 and "" or "s") .. ") x"..v.stock
+          shopstr = shopstr .. "\n**"..cdb[v.name].name.."** (".. tokentext .. ") x"..v.stock
         end
       end
       for i,v in ipairs(sj.consumables) do
+	    if uj.lang == "ko" then
+		  _G['tokentext'] = lang.shop_token_1 .. v.price .. lang.shop_token_2
+		else
+		  _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price == 1 and "" or lang.needs_plural_s == true and lang.plural_s)
+		end
         if showShortHandForm == true then
-          shopstr = shopstr .. "\n**"..consdb[v.name].name.."** ("..v.price.." token" .. (v.price == 1 and "" or "s") .. ") x"..v.stock .. " | ("..v.name..")"
+          shopstr = shopstr .. "\n**"..consdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
         else
-          shopstr = shopstr .. "\n**"..consdb[v.name].name.."** ("..v.price.." token" .. (v.price == 1 and "" or "s") .. ") x"..v.stock
+          shopstr = shopstr .. "\n**"..consdb[v.name].name.."** (".. tokentext .. ") x"..v.stock
         end
       end
 
 
-      if showShortHandForm == true then        
-        shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. sj.itemprice .. " token" .. (sj.itemprice == 1 and "" or "s") ..") x"..sj.itemstock.." | ("..sj.item..")"
+      if showShortHandForm == true then
+	    if uj.lang == "ko" then
+		  _G['tokentext'] = lang.shop_token_1 .. sj.price .. lang.shop_token_2
+		else
+		  _G['tokentext'] = sj.itemprice .. lang.shop_token .. (sj.itemprice == 1 and "" or lang.needs_plural_s == true and lang.plural_s)
+		end
+        shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock.." | ("..sj.item..")"
       else
-        shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. sj.itemprice .. " token" .. (sj.itemprice == 1 and "" or "s") ..") x"..sj.itemstock
+        shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock
       end
 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Shop...",
-        description = 'The **Quaint Shop** is filled with cards and card accessories, all sold by the **Wolf**. It seems to be doing a pretty good job at running the business. As you look around, you also see a framed **Photo** hangning on the wall. The **Ghost** in the corner is standing guard, watching over the store.',
+        title = lang.looking_at_shop,
+        description = lang.looking_shop,
         fields = {{
-          name = "The Shop is selling:",
+          name = lang.shop_selling,
           value = shopstr,
           inline = true
         }},
         image = {url = "attachment://shop.png"}},
         files = {getshopimage()}}
       if not uj.togglechecktoken then
-        message.channel:send('You currently have ' .. uj.tokens .. ' **Token' .. (uj.tokens == 1 and "" or "s") .. '**.')
+        message.channel:send(lang.checktoken_1 .. uj.tokens .. lang.checktoken_2 .. (uj.tokens ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.checktoken_3)
       end
     elseif (request == "wolf")  then
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
@@ -481,24 +497,28 @@ function command.run(message, mt)
       print(minutesleft)
       local durationtext = ""
       if math.floor(minutesleft / 60) > 0 then
-        durationtext = math.floor(minutesleft / 60) .. " hour"
-        if math.floor(minutesleft / 60) ~= 1 then durationtext = durationtext .. "s" end
+        durationtext = math.floor(minutesleft / 60) .. lang.time_hour
+        if lang.needs_plural_s == true then
+			if math.floor(minutesleft / 60) ~= 1 then durationtext = durationtext .. lang.plural_s end
+		end
       end
       if minutesleft % 60 > 0 then
-        if durationtext ~= "" then durationtext = durationtext .. " and " end
-        durationtext = durationtext .. minutesleft % 60 .. " minute"
-        if minutesleft % 60 ~= 1 then durationtext = durationtext .. "s" end
+        if durationtext ~= "" then durationtext = durationtext .. lang.time_and end
+        durationtext = durationtext .. minutesleft % 60 .. lang.time_minute
+		if lang.needs_plural_s == true then
+			if minutesleft % 60 ~= 1 then durationtext = durationtext .. lang.plural_s end
+		end
       end
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Wolf...",
-        description = 'The **Wolf** looks up and gives a friendly wave. They seem quite content with where they are at, but you can see a small amount of worry in their eyes.\n\nWhen asked about the **Shop**, the **Wolf** tells you that it\'s going to be restocked in ' .. durationtext .. '.',
+        title = lang.looking_at_wolf,
+        description = lang.looking_wolf_1 .. durationtext .. lang.looking_wolf_2,
       }}
     elseif (request == "ghost")  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Ghost...",
-        description = 'The **Ghost** stands idily by, making sure the shop remains safe. You can tell it is constantly internally screaming.',
+        title = lang.looking_at_ghost,
+        description = lang.looking_ghost,
       }}
     elseif (request == "photo" or request == "framed photo") then
       local randomimages = {
@@ -509,8 +529,8 @@ function command.run(message, mt)
       local imageindex = (uj.equipped == "okamiiscollar" and math.random(#randomimages) or 1)
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Looking at Photo...",
-        description = 'As you gaze into the framed **Photo**, the dog\'s odd triangular shape reminds you of the Pyrowmid you\'ve just been from.' .. (imageindex ~= 1 and " The rotated figure may have been a result from your collar." or ""),
+        title = lang.looking_at_photo,
+        description = lang.looking_photo .. (imageindex ~= 1 and lang.looking_photo_ookami or ""),
         image = {url = randomimages[imageindex]}
       }}
     else
