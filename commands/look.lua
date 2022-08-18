@@ -380,7 +380,7 @@ function command.run(message, mt)
         title = lang.looking_at_bridge,
         description = lang.looking_bridge,
       }}
-    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and mt[1] == lang.reqeust_shop_1 or mt[1] == lang.reqeust_shop_2))  then 
+    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and mt[1] == lang.request_shop_1 or mt[1] == lang.request_shop_2)) then 
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_shop,
