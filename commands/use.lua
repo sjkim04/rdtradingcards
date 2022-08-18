@@ -1,14 +1,15 @@
 local command = {}
 function command.run(message, mt,bypass)
   print(message.author.name .. " did !use")
+  local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json",defaultjson)
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/nonroom.json","")
   local time = sw:getTime()
   local request = string.lower(mt[1])
 
   if not (message.guild or bypass or constexttofn(request)) then
-    message.channel:send("Sorry, but you cannot use in DMs!")
+    message.channel:send(lang.dm_message)
     return
   end
-  local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json",defaultjson)
   local wj = dpf.loadjson("savedata/worldsave.json", defaultworldsave)
   if not uj.room then uj.room = 0 end
   
