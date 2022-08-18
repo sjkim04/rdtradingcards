@@ -452,8 +452,9 @@ o-''|\\_____/)
     end
   end
   if (uj.room == 3) then ----------------------------------------------------------SHOP
-    local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop.json", "")
-    if request == "shop" then
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop/pet.json", "") -- fallback when request is not shop
+    if request == "shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2) then
+	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop/buy.json", "")
       checkforreload(time:toDays())
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
       local sprice
@@ -475,42 +476,50 @@ o-''|\\_____/)
       --error handling
       local sendshoperror = {
         notenough = function()
-          message.channel:send('The **Wolf** frowns. You don\'t have the ' .. sprice .. ' **Tokens** required to buy the **' .. sname .. '**!')
+			if uj.lang == "ko" then
+				message.channel:send(lang.no_tokens_1 .. sname .. lang.no_tokens_2 .. sprice .. lang.no_tokens_3)
+			else
+				message.channel:send(lang.no_tokens_1 .. sprice .. lang.no_tokens_2 .. sname .. lang.no_tokens_3)
+			end
         end,
 
         outofstock = function()
-          message.channel:send('The **Wolf** frowns. It is currently out of stock of **' .. sname .. '**.')
+          message.channel:send(lang.out_of_stock_1 .. sname .. lang.out_of_stock_2)
         end,
 
         toomanyrequested = function()
-          message.channel:send('The **Wolf** frowns. You can only buy ' .. stock .. ' **' .. sname .. '** at most.')
-        end,
+		  if uj.lang == "ko" then
+			message.channel:send(lang.too_many_requested_1 .. sname .. lang.too_many_requested_2 .. stock .. lang.too_many_requested_3)
+	      else
+		    message.channel:send(lang.too_many_requested_1 .. stock .. lang.too_many_requested_2 .. sname .. lang.too_many_requested_3)
+		  end
+		end,
 
         donthave = function()
           if nopeeking then
-            message.channel:send('The **Wolf** looks at you with confusion. It might not be selling ' .. mt[2] .. ', or it might have misunderstood your request.')
+            message.channel:send(lang.nopeeking_error_1 .. mt[2] .. lang.nopeeking_error_2)
           else
-            message.channel:send('The **Wolf** looks at you with confusion. It doesn\'t seem to be selling **' .. sname .. '**.')
+            message.channel:send(lang.donthave_1 .. sname .. lang.donthave_2)
           end
         end,
 
         alreadyhave = function()
-          message.channel:send('The **Wolf** looks at you with confusion. You already have the **' .. sname .. '** item.')
+          message.channel:send(lang.alreadyhave_1 .. sname .. lang.alreadyhave_2)
         end,
         
         hasfixedmouse = function()
-          message.channel:send('The **Wolf** frowns. You already own a Mouse.')
+          message.channel:send(lang.hasfixedmouse)
         end,
 
         oneitemonly = function()
-          message.channel:send('The **Wolf** frowns. You can only own one of each equippable item.')
+          message.channel:send(lang.oneitemonly)
         end,
 
         unknownrequest = function()
           if nopeeking then
-            message.channel:send('The **Wolf** looks at you with confusion. It might not be selling ' .. mt[2] .. ', or it might have misunderstood your request.')
+            message.channel:send(lang.nopeeking_error_1 .. mt[2] .. lang.nopeeking_error_2)
           else
-            message.channel:send('The **Wolf** looks at you with confusion. It does not appear to know what ' .. mt[2] .. ' is.')
+            message.channel:send(lang.unknownrequest_1 .. mt[2] .. lang.unknownrequest_2)
           end
         end
       }
@@ -551,8 +560,8 @@ o-''|\\_____/)
         --can buy consumable
         ynbuttons(message,{
           color = 0x85c5ff,
-          title = "Buying " .. sname .. "...",
-          description = "The description for this item reads: \n`".. consdb[srequest].description .."`\n<@" .. message.author.id .. ">, will you buy " .. numrequest .. " of them for "..sprice.." **Token" .. (sprice == 1 and "" or "s") .. "**?",
+          title = lang.buying_item_1 .. sname .. lang.buying_item_2,
+          description = lang.consumable_desc .. "\n`".. consdb[srequest].description .."`\n" .. lang.consumable_buy_1 .. message.author.id .. lang.consumable_buy_2 .. numrequest .. lang.consumable_buy_3 .. sprice .. lang.consumable_buy_4 .. (sprice ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.consumable_buy_5,
         },"buy",{itemtype = "consumable",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=numrequest}, message.author.id, uj.lang)
         return
       end
@@ -595,8 +604,8 @@ o-''|\\_____/)
         --can buy item
         ynbuttons(message,{
           color = 0x85c5ff,
-          title = "Buying " .. sname .. "...",
-          description = "The description for this item reads: \n`".. itemdb[srequest].description .."`\n<@" .. message.author.id .. ">, will you buy it for "..sprice.." **Tokens**?",
+          title = lang.buying_item_1 .. sname .. lang.buying_item_2,
+          description = lang.item_desc .. "\n`".. itemdb[srequest].description .."`\n" .. lang.item_buy_1 .. message.author.id .. lang.item_buy_2 .. sprice .. lang.item_buy_3,
         },"buy",{itemtype = "item",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=1}, message.author.id, uj.lang)
         return
       end
@@ -638,8 +647,8 @@ o-''|\\_____/)
         --can buy card
         ynbuttons(message,{
           color = 0x85c5ff,
-          title = "Buying " .. sname .. "...",
-          description = "The description for this card reads: \n`".. cdb[srequest].description .."`\n<@" .. message.author.id .. ">, will you buy " .. numrequest .. " of them for "..sprice.." **Token" .. (sprice == 1 and "" or "s") .."**?",
+          title = lang.buying_card_1 .. sname .. lang.buying_card_2,
+          description = lang.card_desc .. "\n`".. cdb[srequest].description .."`\n" .. lang.card_buy_1 .. message.author.id .. lang.card_buy_2 .. numrequest .. lang.card_buy_3 .. sprice .. lang.card_buy_4 .. (sprice ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.card_buy_5,
         },"buy",{itemtype = "card",sname=sname,sprice=sprice,sindex=sindex,srequest=srequest,numrequest=numrequest}, message.author.id, uj.lang)
         return
       end
@@ -653,24 +662,24 @@ o-''|\\_____/)
         sendshoperror["unknownrequest"]()
       end
       return
-    elseif request == "wolf" then
+    elseif request == "wolf" or (uj.lang ~= "en" and request == lang.request_wolf) then
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Petting Wolf...",
-        description = 'The **Wolf** liked being pet!',
+        title = lang.petting_wolf,
+        description = lang.petted_wolf,
         image = {url = "https://cdn.discordapp.com/attachments/829197797789532181/882289357128618034/petwolf.gif"}
       }}
-    elseif request == "ghost" then
+    elseif request == "ghost" or (uj.lang ~= "en" and request == lang.request_ghost) then
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Petting Ghost...",
-        description = 'As you move your hand closer, an unknown force prevents you from petting the **Ghost**.'
+        title = lang.petting_ghost,
+        description = lang.petted_ghost
       }}
-    elseif request == "photo" or request == "dog" then
+    elseif request == "photo" or request == "dog" or (uj.lang ~= "en" and request == lang.request_photo or request == lang.request_dog) then
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Petting Dog...",
-        description = 'You try to pet the **Dog**, but it\'s unfortunately stuck in a two-dimensional **Photo**.',
+        title = lang.petting_dog,
+        description = lang.petted_dog,
         image = {url = "https://cdn.discordapp.com/attachments/829197797789532181/882287705638203443/okamii_triangle_frame_4.png"}
       }}
     else
@@ -678,11 +687,12 @@ o-''|\\_____/)
     end
   end
   if (not found) and (not bypass) then ----------------------------------NON-ROOM ITEMS GO HERE!-------------------------------------------------
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/nonroom.json","")
     if request == "token"  then
       if uj.tokens > 0 then
-        message.channel:send('You flip a **Token** in the air. It lands on **' .. (math.random(2) == 1 and "heads" or "tails") .. '**.')
+        message.channel:send(lang.tokenflip_1 .. (math.random(2) == 1 and lang.token_heads or lang.token_tails) .. lang.tokenflip_2)
       else
-        message.channel:send('Sadly, you do not have any **Tokens**.')
+        message.channel:send(lang.no_tokens)
       end
       uj.timesused = uj.timesused and uj.timesused + 1 or 1
     elseif constexttofn(request) then
@@ -693,8 +703,8 @@ o-''|\\_____/)
         if not uj.skipprompts then
           ynbuttons(message,{
             color = 0x85c5ff,
-            title = "Using " .. consdb[request].name .. "...",
-            description = "Do you want to use your **" .. consdb[request].name .. "**? The item will be consumed in the process!",
+            title = lang.using_1 .. consdb[request].name .. lang.using_2,
+            description = lang.use_confirm_1 .. consdb[request].name .. lang.use_confirm_2,
           },"useconsumable",{crequest=request,mt=mt},uj.id,uj.lang)
           return
         else
@@ -706,11 +716,11 @@ o-''|\\_____/)
           return
         end
       else
-        message.channel:send("Sorry, but you don't have the **" .. consdb[request].name .. "** item.")
+        message.channel:send(lang.donthave_1 .. consdb[request].name .. lang.donthave_2)
       end
       
     else
-      message.channel:send("Sorry, but I don't know how to use " .. mt[1] .. ".")
+      message.channel:send(lang.unknown_1 .. mt[1] .. lang.unknown_2)
     end
   end
   dpf.savejson("savedata/worldsave.json", wj)
