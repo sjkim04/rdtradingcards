@@ -22,8 +22,10 @@ function command.run(message, mt,bypass)
 
   ----------------------------PYROWMID------------------------
   if uj.room == 0 or bypass then
-    if request == "strange machine" or request == "machine" then 
-      if not uj.tokens then uj.tokens = 0 end
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/pyrowmid/pyrowmid.json","")
+    if request == "strange machine" or request == "machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2) then 
+      lang = dpf.loadjson("langs/" .. uj.lang .. "/use/pyrowmid/machine.json","")
+	  if not uj.tokens then uj.tokens = 0 end
       if not uj.items then uj.items = {nothing = true} end
       if wj.ws ~= 506 then
         local itempt = {}
@@ -35,18 +37,18 @@ function command.run(message, mt,bypass)
           end
         end
         if #itempt == 0 then
-          message.channel:send('You already have every item that is currently available.')
+          message.channel:send(lang.allitems)
           return
         end
         if uj.tokens < 3 then
-          message.channel:send('You try to turn the crank, but it does not budge. There is a slot above it that looks like it could fit three **Tokens**...')
+          message.channel:send(lang.no_tokens)
           return
         end
         if not uj.skipprompts then
           ynbuttons(message, {
             color = 0x85c5ff,
-            title = "Using Strange Machine...",
-            description = 'Will you put three **Tokens** into the **Strange Machine?** (tokens remaining: ' .. uj.tokens .. ')',
+            title = lang.using_machine,
+            description = lang.use_machine_1 .. uj.tokens .. lang.use_machine_2,
           },"usemachine",{}, uj.id, uj.lang)
           return
         else
@@ -54,40 +56,52 @@ function command.run(message, mt,bypass)
           uj.items[newitem] = true
           uj.tokens = uj.tokens - 3
           uj.timesused = uj.timesused and uj.timesused + 1 or 1
-          message.channel:send(trf("crank") .. itemdb[newitem].name .. '**! You put the **'.. itemdb[newitem].name ..'** with your items.')
-        end
+		  if uj.lang == "ko" then		    
+		    local dep = {"입금하고", "삽입하고", "넣고", "슬롯에 집어넣고"}
+			local cdep = math.random(1, #dep)
+			local speen = {" 돌리", " 사용하", " 회전시키"}
+			local cspeen = math.random(1, #speen)
+			local size = {" 큰 ", " 작은 ", " ", " "}
+			local csize = math.random(1, #size)
+			local action = {"나옵니다", "떨어져 나옵니다", "튕겨져 나옵니다", "굴려 나옵니다"}
+			local caction = math.random(1, #action)
+			message.channel:send(lang.used_machine_1 .. dep[cdep] .. speen[cspeen] .. lang.used_machine_2 .. size[csize] .. lang.used_machine_3 .. action[caction] .. lang.used_machine_4 .. itemdb[newitem].name .. lang.used_machine_5 .. itemdb[newitem].name .. lang.used_machine_6)
+		  else
+		    message.channel:send(trf("crank") .. itemdb[newitem].name .. lang.used_machine_1 .. itemdb[newitem].name .. lang.used_machine_2)
+		  end
+		end
       else
         if uj.tokens >= 4 then
           ynbuttons(message, {
           color = 0x85c5ff,
-          title = "Using Strange Machine...",
-          description = 'Will you put four **Tokens** into the **Strange Machine?** (tokens remaining: ' .. uj.tokens .. ')', 
-          },"getladder", {})
+          title = lang.using_machine,
+          description = lang.use_machine_four_1 .. uj.tokens .. lang.use_machine_four_2, 
+          },"getladder", {}, uj.id, uj.lang)
           return
         else
-          message.channel:send('You try to turn the crank, but it does not budge. There is a slot above it that looks like it could fit four **Tokens**...')
+          message.channel:send(lang.notokens_four)
         end
       end
-    elseif request == "hole" then
+    elseif request == "hole" or (uj.lang ~= "en" and request == lang.request_hole) then
       if uj.tokens == nil then uj.tokens = 0 end
       if wj.ws >= 506 or wj.ws < 501 then
-        message.channel:send('The **Hole** is not accepting donations at this time.')
+        message.channel:send(lang.hole_nodonations)
         return
       end
       if uj.tokens > 0 then
         ynbuttons(message, {
         color = 0x85c5ff,
-        title = "Using Hole...",
-        description = 'Will you put a **Token** into the **Hole?** (tokens remaining: ' .. uj.tokens .. ')', 
+        title = lang.using_hole,
+        description = lang.use_hole_1 .. uj.tokens .. lang.use_hole_2, 
         },"usehole", {})
         return
       else
-        message.channel:send('You have no **Tokens** to offer to the **Hole.**')
+        message.channel:send(lang.hole_notokens)
       end
-    elseif request == "panda"  then    
+    elseif request == "panda" or (uj.lang ~= "en" and request == lang.request_panda) then    
       if uj.equipped == "coolhat" then
         if not uj.storage.ssss45 then
-          message.channel:send("The **Panda** takes one look at your **Cool Hat**, and puts a **Shaun's Server Statistics Sampling #45** card into your storage out of respect.")
+          message.channel:send(lang.panda_ssss45)
           uj.storage.ssss45 = 1
         else
           message.channel:send(':pensive:')
@@ -96,23 +110,23 @@ function command.run(message, mt,bypass)
         message.channel:send(':flushed:')
       end
       uj.timesused = uj.timesused and uj.timesused + 1 or 1
-    elseif request == "throne" then       
-      message.channel:send('It appears that the **Throne** is already in use by the **Panda**.')
+    elseif request == "throne" or (uj.lang ~= "en" and request == lang.request_throne) then       
+      message.channel:send(lang.throne_by_panda)
       uj.timesused = uj.timesused and uj.timesused + 1 or 1
-    elseif (request == "necklace" or request == "faithfulnecklace" or request == "faithful necklace") and uj.items["faithfulnecklace"] then       
-      message.channel:send('You wash off the **Faithful Necklace**, and then immediately drop it on the grimy floor of the **Abandoned Lab**. Whoops.')
+    elseif (request == "necklace" or request == "faithfulnecklace" or request == "faithful necklace" or (uj.lang ~= "en" and request == lang.request_necklace)) and uj.items["faithfulnecklace"] then       
+      message.channel:send(lang.wash_necklace)
       uj.timesused = uj.timesused and uj.timesused + 1 or 1
-    elseif request == "ladder" then
+    elseif request == "ladder" or (uj.lang ~= "en" and request == lang.request_ladder) then
       if wj.ws >= 507 then
-        local embedtitle = "Using the ladder..."
+        local embedtitle = lang.using_ladder
         if not wj.labdiscovered then
-          embedtitle = "NEW AREA DISCOVERED: LAB"
+          embedtitle = lang.discovered_lab
           wj.labdiscovered = true
         end
         message.channel:send{embed = {
           color = 0x85c5ff,
           title = embedtitle,
-          description = 'As you climb down the **Ladder**, you begin to hear the sound of a large computer whirring. Reaching the bottom reveals the source, a huge terminal, in the middle of an **Abandoned Lab.**',
+          description = lang.used_ladder,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831907381830746162/labfade.gif'
           }
@@ -124,8 +138,8 @@ function command.run(message, mt,bypass)
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Using the ladder...",
-          description = 'You attempt to climb down the **Ladder**. Unfortunately, the **Hole** is still too small for you to fit through. You cannot wiggle your way out of it.',
+          title = lang.using_ladder,
+          description = lang.using_ladder_small,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/831868583696269312/nowigglezone.png'
           }
