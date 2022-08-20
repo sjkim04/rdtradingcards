@@ -180,13 +180,108 @@ function command.run(message, mt)
     print(i)
     if storagetable[i] then storagestring = storagestring .. storagetable[i] end
   end
+  
+  local seasonnum = ""
+  local multipleSeasons = false
+  if filterSeason == true then
+    if filterSeason0 == true then
+		seasonnum = "0"
+	end
+	if filterSeason1 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 1"
+			multipleSeasons = true
+		else
+			seasonnum = "1"
+		end
+	end
+	if filterSeason2 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 2"
+			multipleSeasons = true
+		else
+			seasonnum = "2"
+		end
+	end
+	if filterSeason3 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 3"
+			multipleSeasons = true
+		else
+			seasonnum = "3"
+		end
+	end
+	if filterSeason4 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 4"
+			multipleSeasons = true
+		else
+			seasonnum = "4"
+		end
+	end
+	if filterSeason5 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 5"
+			multipleSeasons = true
+		else
+			seasonnum = "5"
+		end
+	end
+	if filterSeason6 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 6"
+			multipleSeasons = true
+		else
+			seasonnum = "6"
+		end
+	end
+	if filterSeason7 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 7"
+			multipleSeasons = true
+		else
+			seasonnum = "7"
+		end
+	end
+	if filterSeason8 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 8"
+			multipleSeasons = true
+		else
+			seasonnum = "8"
+		end
+	end
+	if filterSeason9 == true then
+		if seasonnum ~= "" then
+			seasonnum = seasonnum .. ", 9"
+			multipleSeasons = true
+		else
+			seasonnum = "9"
+		end
+	end
+  end
+	
+  local embedtitle = message.author.name .. lang.embed_title
+  if filterSeason == true then
+	local filtertitle = ""
+	if multipleSeasons == true then
+		if lang.needs_plural_s == true then
+			filtertitle = lang.plural_s .. " " .. seasonnum
+		else
+			filtertitle = " " .. seasonnum
+		end
+	else
+		filtertitle = " " .. seasonnum
+	end
+	embedtitle = message.author.name .. lang.embed_title_season_1 .. filtertitle .. lang.embed_title_season_2
+  end
 
   if uj.lang == "ko" then
     message.channel:send{
     content = message.author.mentionString .. lang.embed_contains,
     embed = {
       color = 0x85c5ff,
-      title = message.author.name .. lang.embed_title,
+      title = embedtitle,
       description = storagestring,
       footer = {
         text =  lang.embed_page_1 .. maxpn .. lang.embed_page_2 .. pagenumber .. lang.embed_page_3,
