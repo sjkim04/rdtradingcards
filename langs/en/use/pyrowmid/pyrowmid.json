@@ -1,7 +1,7 @@
 {
 	"request_hole": "",
 	"hole_nodonations": "The **Hole** is not accepting donations at this time.",
-	"using_hole": "Using Hole..."
+	"using_hole": "Using Hole...",
 	"use_hole_1": "Will you put a **Token** into the **Hole?** (tokens remaining: ",
 	"use_hole_2": ")",
 	"hole_notokens": "You have no **Tokens** to offer to the **Hole.**",

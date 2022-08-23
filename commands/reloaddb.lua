@@ -667,20 +667,20 @@ function command.run(message, mt, overwrite)
 	addcommand("lang",cmd.language)
 	addcommand("langlist",cmd.langlist)
     _G['handlemessage'] = function (message, content)
-	if not (message.author.bot == true) then
-	  local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
-	  if not uj.lang then
-		uj.lang = "en"
-	  end
-	  if not uj.pronouns["selection"] then
-		uj.pronouns["selection"] = uj.pronouns["they"]
-	  end
-	  dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
-    end
 	  if message.author.id ~= client.user.id or content then
         local messagecontent = content or message.content
         for i,v in ipairs(commands) do
           if string.trim(string.lower(string.sub(messagecontent, 0, #v.trigger+1))) == v.trigger then
+		    if not (message.author.bot == true) then
+				local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
+				if not uj.lang then
+					uj.lang = "en"
+				end
+				if not uj.pronouns["selection"] then
+					uj.pronouns["selection"] = uj.pronouns["they"]
+				end
+				dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
+			end
             print("found ".. v.trigger)
             local mt = {}
             local nmt = {}

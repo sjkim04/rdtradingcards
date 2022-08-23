@@ -2,7 +2,7 @@ local reaction = {}
 function reaction.run(message, interaction, data, response)
   local ujf = "savedata/" .. message.author.id .. ".json"
   local uj = dpf.loadjson(ujf, defaultjson)
-  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/box.json", "")
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/lab/box.json", "")
   local wj = dpf.loadjson("savedata/worldsave.json", defaultworldsave)
   local time = sw:getTime()
   print("Loaded uj")

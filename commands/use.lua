@@ -155,20 +155,21 @@ function command.run(message, mt,bypass)
   
   ----------------------------LAB------------------------
   if (uj.room == 1 or bypass) and wj.labdiscovered then
-    if request == "spider" or request == "spiderweb" or request == "web" or request == "spider web" then       
-      ynbuttons(message, 'Are you okay with seeing a spider?',"spideruse",{},uj.id,uj.lang)
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/lab/lab.json","")
+    if request == "spider" or request == "spiderweb" or request == "web" or request == "spider web" or (uj.lang ~= "en" and request == lang.request_spider_1 or request == lang.request_spider_2) then       
+      ynbuttons(message, lang.spider_alert,"spideruse",{},uj.id,uj.lang)
       return
-    elseif request == "table" then 
+    elseif request == "table" or (uj.lang ~= "en" and request == lang.request_table) then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Using Table...",
-        description = 'You dust off the **Table**. But as soon as you look away, the **Table** is covered in dust again.',
+        title = lang.using_table,
+        description = lang.use_table,
       }}
-    elseif request == "poster" or request == "catposter" or request == "cat poster"  then 
+    elseif request == "poster" or request == "catposter" or request == "cat poster" or (uj.lang ~= "en" and request == lang.request_poster_1 or request == lang.request_poster_2) then 
       if wj.ws ~= 801 then
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "What poster?",
+          title = lang.using_poster_before801,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/838793078574809098/blankwall.png'
           }
@@ -176,31 +177,31 @@ function command.run(message, mt,bypass)
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Using Cat Poster...",
-          description = "By **Pull**ing away the **Cat Poster** and putting it up elsewhere in the room, you have revealed a **Scanner**.",
+          title = lang.using_poster,
+          description = lang.use_poster,
           image = {
             url = 'https://cdn.discordapp.com/attachments/829197797789532181/862883805786144768/scanner.png'
           }
         }}
         wj.ws = 802
       end
-    elseif request == "mouse hole" or request == "mouse" or request == "mousehole"  then 
+    elseif request == "mouse hole" or request == "mouse" or request == "mousehole" or (uj.lang ~= "en" and request == lang.request_hole_1 or request == lang.request_hole_2 or request == lang.request_hole_3) then 
       if uj.equipped == "brokenmouse" then
         ynbuttons(message,{
           color = 0x85c5ff,
-          title = "Using Mouse Hole...",
-          description = message.author.mentionString .. ', do you want to put your **Broken Mouse** into the **Mouse Hole?**',
+          title = lang.using_hole,
+          description = message.author.mentionString .. lang.use_hole_mouse,
         },"usemousehole",{},uj.id,uj.lang)
         return
       else
         message.channel:send{embed = {
           color = 0x85c5ff,
-          title = "Using Mouse Hole...",
-          description = 'You do not have anything to put into the **Mouse Hole.**',
+          title = lang.using_hole,
+          description = lang.use_hole,
         }}
       end
     elseif request == "peculiar box" or request == "box" or request == "peculiarbox" then 
-	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/box.json", "")
+	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/lab/box.json", "")
       if not uj.lastbox then 
         uj.lastbox = -24
       end
@@ -297,9 +298,10 @@ function command.run(message, mt,bypass)
       end
       
     elseif request == "terminal" then 
+	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/lab/terminal.json", "")
       uj.timesused = uj.timesused and uj.timesused + 1 or 1
       if not mt[2] then mt[2] = "" end
-      local embedtitle = "Using Terminal..."
+      local embedtitle = lang.using_terminal
       local embeddescription = nil
       local embedimage = nil
       local filename = nil
@@ -312,7 +314,7 @@ function command.run(message, mt,bypass)
         end
       else
         if string.lower(mt[2]) == "gnuthca" then
-          embeddescription ='`ERROR: USER ALREADY LOGGED IN`'
+          embeddescription = lang.logged_in
           embedimage = "https://cdn.discordapp.com/attachments/829197797789532181/838836625391484979/terminal2.gif"
         elseif string.lower(mt[2]) == "cat" then
           embeddescription = '`=^•_•^=`'
@@ -331,18 +333,18 @@ o-''|\\_____/)
             data = usernametojson(mt[3])
           end
           if not data then
-            embeddescription = '`ERROR: DATA NOT FOUND.`'
+            embeddescription = lang.savedata_not_found
           else
-            embeddescription = '`DATA LOCATED. GENERATING PRINTOUT`'
+            embeddescription = lang.savedata_success
             filename = data
           end
         elseif string.lower(mt[2]) == "piss" then
-          embeddescription = '`peachy moment 😳😳😳`'
+          embeddescription = lang.piss_message
           embedimage = "https://cdn.discordapp.com/attachments/793993844789870603/880369620442304552/unknown.png"
         elseif string.lower(mt[2]) == "teikyou" then
           embedimage = "https://cdn.discordapp.com/attachments/829197797789532181/849431570103664640/teikyou.png"
         elseif string.lower(mt[2]) == "help" or mt[2] == "" then
-          embeddescription = '`AVAILABLE COMMANDS: \nHELP\nSTATS\nUPGRADE\nCREDITS\nSAVEDATA' .. (wj.ws >= 701 and "\nLOGS" or "") .. "`"
+          embeddescription = lang.help_message .. "\nHELP\nSTATS\nUPGRADE\nCREDITS\nSAVEDATA" .. (wj.ws >= 701 and "\nLOGS" or "") .. "`"
           embedimage = "https://cdn.discordapp.com/attachments/829197797789532181/838836625391484979/terminal2.gif"
         elseif string.lower(mt[2]) == "stats" then
           if not uj.timespulled then uj.timespulled = 0 end
@@ -363,15 +365,15 @@ o-''|\\_____/)
           if not uj.timesitemgiven then uj.timesitemgiven = 0 end
           if not uj.timesitemreceived then uj.timesitemreceived = 0 end
           if not uj.timesprestiged then uj.timesprestiged = 0 end
-          embeddescription = 'The **Terminal** prints out a slip of paper. It reads:\n`Times Pulled: ' .. uj.timespulled .. '\nTimes Used: ' .. uj.timesused .. '\nItems Used: ' .. uj.timesitemused .. '\nTimes Looked: ' .. uj.timeslooked .. '\nTimes Prayed: ' .. uj.timesprayed .. '\nTimes Shredded: ' .. uj.timesshredded .. '\nTimes Stored: ' .. uj.timesstored .. '\nTimes Traded: ' .. uj.timestraded .. '\nTimes Peculiar Box has been Used: ' .. uj.timesusedbox .. '\nTimes Doubleclicked: ' .. uj.timesdoubleclicked .. '\nTokens Donated: ' .. uj.tokensdonated .. '\nItems Given: ' .. uj.timesitemgiven .. '\nItems Received: ' .. uj.timesitemreceived .. '\nCards Given: ' .. uj.timescardgiven .. '\nCards Received: ' .. uj.timescardreceived .. '\nCards Thrown: ' .. uj.timesthrown .. '\nCards Caught: ' .. uj.timescaught .. '\nTimes Prestiged: ' .. uj.timesprestiged ..(math.random(100) == 1 and "\nRemember, the Factory is watching!" or "") .. '`'
+          embeddescription = lang.stats_message .. "\n`" .. lang.stats_timespulled .. uj.timespulled .. "\n" .. lang.stats_timesused .. uj.timesused .. "\n" .. lang.stats_timesitemused .. uj.timesitemused .. "\n" .. lang.stats_timeslooked .. uj.timeslooked .. "\n" .. lang.stats_timesprayed .. uj.timesprayed .. "\n" .. lang.stats_timesshredded .. uj.timesshredded .. "\n" .. lang.stats_timesstored .. uj.timesstored .. "\n" .. lang.stats_timestraded .. uj.timestraded .. "\n" .. lang.stats_timesusedbox .. uj.timesusedbox .. "\n" .. lang.stats_timesdoubleclicked .. uj.timesdoubleclicked .. "\n" .. lang.stats_timesdonated .. uj.tokensdonated .. "\n" .. lang.stats_timesitemgiven .. uj.timesitemgiven .. "\n" .. lang.stats_timesitemreceived .. uj.timesitemreceived .. "\n" .. lang.stats_timescardgiven .. uj.timescardgiven .. "\n" .. lang.stats_timescardreceived .. uj.timescardreceived .. "\n" .. lang.stats_timesthrown .. uj.timesthrown .. "\n" .. lang.stats_timescaught .. uj.timescaught .. "\n" .. lang.stats_timesprestiged .. uj.timesprestiged ..(math.random(100) == 1 and "\n" .. lang.stats_factory or "") .. "`"
         elseif string.lower(mt[2]) == "credits" then
-          embedtitle = "Credits"
+          embedtitle = lang.credits_title
           embeddescription = 'https://docs.google.com/document/d/1WgUqA8HNlBtjaM4Gpp4vTTEZf9t60EuJ34jl2TleThQ/edit?usp=sharing'
         elseif string.lower(mt[2]) == "logs" then
-          embedtitle = "Logs"
+          embedtitle = lang.logs_title
           embeddescription = 'https://docs.google.com/document/d/1td9u_n-ou-yIKHKU766T-Ue4EdJGYThjcl-MRxRUA5E/edit?usp=sharing'
         elseif string.lower(mt[2]) == "laureladams" and wj.ws >= 701 then
-          embedtitle = "Email Logs"
+          embedtitle = lang.emaillogs_title
           embeddescription = "https://docs.google.com/document/d/1_dXPtCVsvDOL_XHpQ6CzX8A2KcLtymPERV3MSEJ5eZo/edit?usp=sharing"
           if wj.ws == 701 then wj.ws = 702 end
         elseif string.lower(mt[2]) == "upgrade" then
@@ -379,8 +381,8 @@ o-''|\\_____/)
             if not uj.skipprompts then
               ynbuttons(message, {
                 color = 0x85c5ff,
-                title = "Using Terminal...",
-                description = 'Will you put a **Token** into the **Terminal?** (tokens remaining: ' .. uj.tokens .. ')',
+                title = lang.using_terminal_upgrade,
+                description = lang.upgrade_prompt_1 .. uj.tokens .. lang.upgrade_prompt_2,
                 image = {
                   url = "https://cdn.discordapp.com/attachments/829197797789532181/838894186472275988/terminal5.png"
                 },
@@ -388,32 +390,32 @@ o-''|\\_____/)
                   text =  message.author.name,
                   icon_url = message.author.avatarURL
                 }
-              },"usehole",{},uj.lang,uj.id)
+              },"usehole",{},uj.id,uj.lang)
               return
             else
               uj.tokens = uj.tokens - 1
               uj.timesused = uj.timesused and uj.timesused + 1 or 1
               uj.tokensdonated = uj.tokensdonated and uj.tokensdonated + 1 or 1
               wj.tokensdonated = wj.tokensdonated + 1
-
-              embeddescription = 'The **Terminal** whirrs happily. A printout lets you know that ' .. wj.tokensdonated .. ' tokens have been donated so far.'
+			  
+              embeddescription = lang.donated_terminal_1 .. wj.tokensdonated .. lang.donated_terminal_2
               embedimage = upgradeimages[math.random(#upgradeimages)]
             end
           else
-            embeddescription = 'Unfortunately, you have no **Tokens** to your name.'
+            embeddescription = lang.upgrade_no_tokens
             embedimage = "https://cdn.discordapp.com/attachments/829197797789532181/838894186472275988/terminal5.png"
           end
         elseif string.lower(mt[2]) == "pull" then
           if (wj.ws >= 804)  then
-            embedtitle = "PULLING CARD... ERROR!"
-            embeddescription = '`message.author.mentionString .. " got a **" .. KEY .. "** card! The **" .. KEY .."** card has been added to " .. uj.pronouns["their"] .. "STORAGE. The shorthand form of this card is **" .. newcard .. "**." uj.storage.key = 1 dpf.savejson("savedata/" .. message.author.id .. ".json", uj)`'
+            embedtitle = lang.pull_title
+            embeddescription = '`message.author.mentionString .. \" got a **\" .. KEY .. \"** card! The **\" .. KEY ..\"** card has been added to \" .. uj.pronouns[\"their\"] .. \"STORAGE. The shorthand form of this card is **\" .. newcard .. \"**.\" uj.storage.key = 1 dpf.savejson(\"savedata/\" .. message.author.id .. \".json\", uj)`'
             embedimage = "https://cdn.discordapp.com/attachments/829197797789532181/865792363167219722/key.png"
             uj.storage.key = 1
           else
-            embeddescription = '`ERROR: CARD PRINTER JAMMED. PLEASE WAIT.`'
+            embeddescription = lang.pull_jammed
           end
         else
-          embeddescription = '`COMMAND "' .. mt[2] ..  '" NOT RECOGNIZED`'
+          embeddescription = lang.unknown_1 .. mt[2] ..  lang.unknown_2
         end
       end
       message.channel:send{embed = {
@@ -439,30 +441,35 @@ o-''|\\_____/)
   end
   ----------------------------------------------------------WINDY MOUNTAINS
   if uj.room == 2 then
-    if (request == "pyrowmid")  then 
-	  message.channel:send("You make your way back down to the **Pyrowmid**...")
+    local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/mountains.json")
+    if (request == "pyrowmid" or (uj.lang ~= "en" and request == lang.request_pyrowmid))  then 
+	  message.channel:send(lang.use_pyrowmid)
       uj.room = 0
+	  dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
+	  cmd.look.run(message, {"pyrowmid"})
       --TODO: find a way to show a location's main c!look?
-    elseif (request == "bridge")  then 
+    elseif (request == "bridge" or (uj.lang ~= "en" and request == lang.request_bridge))  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Using Bridge...",
-        description = 'Even though the **Bridge** feels relatively sturdy to walk on, it is probably best not to mess with it too much. You never know when it all might come *crash*ing down.',
+        title = lang.using_bridge,
+        description = lang.use_bridge,
       }}
-    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop")  then 
-      message.channel:send("You step inside of the **Quaint Shop**...")
+    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2))  then 
+      message.channel:send(lang.use_shop)
       uj.room = 3
-    elseif (request == "barrels")  then 
+	  dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
+	  cmd.look.run(message, {"shop"})
+    elseif (request == "barrels" or (uj.lang ~= "en" and request == lang.request_barrels))  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Using Barrels...",
-        description = 'Interestingly, you cannot seem to find a way to open the **Barrels**, or even look at what could be inside of them...',
+        title = lang.using_barrels,
+        description = lang.use_barrels,
       }}
-    elseif (request == "clouds")  then 
+    elseif (request == "clouds" or (uj.lang ~= "en" and request == lang.request_clouds))  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
-        title = "Using Clouds...",
-        description = 'You try to touch one of the clouds. Unsurprisingly, you cannot actually reach that far.',
+        title = lang.using_clouds,
+        description = lang.use_clouds,
       }}
        
     else
