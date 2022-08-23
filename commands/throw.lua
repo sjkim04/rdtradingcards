@@ -110,7 +110,7 @@ function command.run(message, mt)
       fallstring = kotrfstring .. message.author.mentionString .. kolang.fall_message_1 .. kolang.fall_message_2
 	  fallstring = fallstring .. "\n" .. trf("fall",{name = thrownname, item = cardfilename and enlang.card_fall or enlang.item_fall}) .. message.author.mentionString .. enlang.fall_message_1 .. prosel.getPronoun("en", uj.pronouns["selection"], "their") .. enlang.fall_message_2
 	else
-	  fallstring = trf("fall",{name = thrownname, item = cardfilename and enlang.card or lang.item}) .. message.author.mentionString .. enlang.fall_message_1 .. prosel.getPronoun("en", uj.pronouns["selection"], "their") .. enlang.fall_message_2
+	  fallstring = trf("fall",{name = thrownname, item = cardfilename and enlang.card_fall or lang.item_fall}) .. message.author.mentionString .. enlang.fall_message_1 .. prosel.getPronoun("en", uj.pronouns["selection"], "their") .. enlang.fall_message_2
 	  fallstring = fallstring .. "\n" .. kotrfstring .. message.author.mentionString .. kolang.fall_message_1 .. kolang.fall_message_2
 	end
 	message.channel:send(fallstring)
