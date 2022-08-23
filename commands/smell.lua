@@ -140,7 +140,7 @@ function command.run(message, mt)
         end
       end
 
-    elseif (request == "spiderweb" or request == "spider web" or request == "web") and wj.smellable then
+    elseif (request == "spiderweb" or request == "spider web" or request == "web" or (uj.lang ~= "en" and request == lang.request_spider_1 or request == lang.request_spider_2)) and wj.smellable then
       ynbuttons(message, lang.spider_alert,"spidersmell",{},uj.id,uj.lang)
     elseif hcsmells[request] then
       message.channel:send(hcsmells[request])

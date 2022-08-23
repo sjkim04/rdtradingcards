@@ -11,7 +11,7 @@ function reaction.run(message, interaction, data, response)
     uj.items.fixedmouse = true
     uj.equipped = "fixedmouse"
 
-    interaction:reply(lang.using_hole)
+    interaction:reply(lang.used_hole)
     dpf.savejson(ujf,uj)
   end
   

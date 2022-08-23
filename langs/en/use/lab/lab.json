@@ -24,6 +24,6 @@
 	"use_hole_mouse": ", do you want to put your **Broken Mouse** into the **Mouse Hole?**",
 	"use_hole": "You do not have anything to put into the **Mouse Hole.**",
 	
-	"using_hole": "You start to push your **Broken Mouse** into the hole, but two grey furry hands pull it in the rest of the way. You can hear the mouse using a saw to open up the **Broken Mouse**, which seems terribly unsafe! After a few minutes of tinkering, the mouse pushes out a **Fixed Mouse**, complete with a green sticker denoting its newfound functionality. You put the **Fixed Mouse** with your other items.",
+	"used_hole": "You start to push your **Broken Mouse** into the hole, but two grey furry hands pull it in the rest of the way. You can hear the mouse using a saw to open up the **Broken Mouse**, which seems terribly unsafe! After a few minutes of tinkering, the mouse pushes out a **Fixed Mouse**, complete with a green sticker denoting its newfound functionality. You put the **Fixed Mouse** with your other items.",
 	"denied_hole": "You decide to not put the **Broken Mouse** in the **Mouse Hole**.",
 }
