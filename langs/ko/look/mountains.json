@@ -1,6 +1,7 @@
 {
 	"request_mountains_1": "산",
 	"request_mountains_2": "바람부는 산",
+	"request_mountains_3": "바람부는산",
 	"looking_at_mountains": "산을 보니...",
 	"looking_mountains": "**바람부는 산**은 **행라미드** 근처에 있다. **다리** 건너편에는 **진기한 가게**가 있으며, 그 옆에 **통** 몇 개가 있는 것 같다. 하늘은 **구름**으로 가득 차 있다.",
 	
@@ -14,6 +15,8 @@
 	
 	"request_shop_1": "가게",
 	"request_shop_2": "진기한 가게",
+	"request_shop_3": "진기한가게",
+	"request_shop_4": "상점",
 	"looking_at_shop": "진기한 가게를 보니...",
 	"looking_shop": "**진기한 가게**에는 밖에 \"카드와 물건\"을 판매한다고 적힌 표지판이 있다. 당신이 카드나 물건이 필요하다면, 확인해 볼 만한 가치가 있어 보인다.",
 	

@@ -1,4 +1,5 @@
 {
+	"request_token": "토큰",
 	"tokenflip_1": "**토큰** 1개를 공중에 튕긴다. 토큰은 **",
 	"token_heads": "앞면",
 	"token_tails": "뒷면",

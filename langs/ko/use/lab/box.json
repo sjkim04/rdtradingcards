@@ -15,11 +15,9 @@
 	
 	"boxed_message_1": "<@",
 	"boxed_message_2": ">님이 인벤토리에서 **",
-	"boxed_message_3": "** 카드를 꺼내서 ",
-	"boxed_message_4": "상자 안에 넣습니다. 카드가 들어가면서, **",
-	"boxed_message_5": "** 카드가 주머니에서 ",
-	"boxed_message_6": "나타납니다! 이 카드의 축약명은 **",
-	"boxed_message_7": "**입니다.",
+	"boxed_message_3": "** 카드를 꺼내서 상자 안에 넣습니다. 카드가 들어가면서, **",
+	"boxed_message_4": "** 카드가 주머니에서 나타납니다! 이 카드의 축약명은 **",
+	"boxed_message_5": "**입니다.",
 	
 	"not_in_storage_1": "**",
 	"not_in_storage_2": "** 카드가 당신의 저장고에 저장되어 있지 않습니다!",

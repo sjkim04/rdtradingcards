@@ -93,21 +93,21 @@ function command.run(message, mt)
       s7booster = lang.smell_s7booster
     }
 
-    if request == "strange machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2) then
+    if request == "strange machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2 or request == lang.request_machine_3) then
       request = "machine"
-    elseif request == "abandoned lab" or (uj.lang ~= "en" and request == lang.request_lab_1 or request == lang.request_lab_2) then
+    elseif request == "abandoned lab" or (uj.lang ~= "en" and request == lang.request_lab_1 or request == lang.request_lab_2 or request == lang.request_lab_3) then
       request = "lab"
     elseif request == "database" or (uj.lang ~= "en" and request == lang.request_terminal_1 or request == lang.request_terminal_2) then
       request = "terminal"
-    elseif request == "cat poster" or (uj.lang ~= "en" and request == lang.request_poster_1 or request == lang.request_poster_2) then
+    elseif request == "cat poster" or (uj.lang ~= "en" and request == lang.request_poster_1 or request == lang.request_poster_2 or request == lang.request_poster_3) then
       request = "poster"
     elseif request == "mouse hole" or request == "mouse" or (uj.lang ~= "en" and request == lang.request_mousehole_1 or request == lang.request_mousehole_2 or request == lang.request_mousehole_3) then
       request = "mousehole"
-    elseif request == "peculiar box" or request == "peculiarbox" or (uj.lang ~= "en" and request == lang.request_box_1 or request == lang.request_box_2) then
+    elseif request == "peculiar box" or request == "peculiarbox" or (uj.lang ~= "en" and request == lang.request_box_1 or request == lang.request_box_2 or request == lang.request_box_3) then
       request = "box"
-    elseif request == "windymountains" or request == "windy mountains" or (uj.lang ~= "en" and request == lang.request_mountains_1 or request == lang.request_mountains_2) then
+    elseif request == "windymountains" or request == "windy mountains" or (uj.lang ~= "en" and request == lang.request_mountains_1 or request == lang.request_mountains_2 or request == lang.request_mountains_3) then
       request = "mountains"
-    elseif request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2) then
+    elseif request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2 or request == lang.request_shop_3 or request == lang.request_shop_4) then
       request = "shop"
     end
     

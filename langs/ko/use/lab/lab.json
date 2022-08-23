@@ -13,6 +13,7 @@
 	
 	"request_poster_1": "포스터",
 	"request_poster_2": "고양이 포스터",
+	"request_poster_3": "고양이포스터",
 	"using_poster_before801": "무슨 포스터?",
 	"using_poster": "고양이 포스터를 사용하니...",
 	"use_poster": "**고양이 포스터**를 뜯어 내고, 옆에 다시 붙이니, **스캐너**가 드러난다.",
@@ -26,4 +27,8 @@
 	
 	"used_hole": "**Broken Mouse**를 구멍 안에 넣으려고 마우스를 바닥에 놓지만, 두 회색 손이 마우스를 잡아서 구멍 안에 들어가 버린다. 쥐가 톱을 사용해서, 아주 위험하게 마우스를 여는 것이 들린다! 몇분간의 조립을 거쳐서, 쥐가 새로 발견된 기능이 적힌 초록색 스티커와 함께 **Fixed Mouse**를 밀어낸다. 당신은 **Fixed Mouse**를 다른 아이템들과 같이 놓는다.",
 	"denied_hole": "**Broken Mouse**를 **쥐구멍** 안에 넣지 않기로 했다.",
+	
+	"request_box_1": "기묘한 상자",
+	"request_box_2": "상자",
+	"request_box_3": "기묘한상자",
 }

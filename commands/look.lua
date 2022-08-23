@@ -127,7 +127,7 @@ function command.run(message, mt)
           title = lang.looking_at_throne,
           description = lang.looking_throne,
         }}
-    elseif string.lower(mt[1]) == "strange machine" or string.lower(mt[1]) == "machine" or (uj.lang ~= "en" and mt[1] == lang.request_machine_1 or mt[1] == lang.request_machine_2) then 
+    elseif string.lower(mt[1]) == "strange machine" or string.lower(mt[1]) == "machine" or (uj.lang ~= "en" and mt[1] == lang.request_machine_1 or mt[1] == lang.request_machine_2 or mt[1] == lang.request_machine_3) then 
       if wj.ws == 506 then
         message.channel:send{embed = {
           color = 0x85c5ff,
@@ -213,7 +213,7 @@ function command.run(message, mt)
           }
         }}
       end
-    elseif (string.lower(mt[1]) == "ladder" or (uj.lang ~= "en" and uj[1] == lang.request_ladder)) and wj.labdiscovered  then 
+    elseif (string.lower(mt[1]) == "ladder" or (uj.lang ~= "en" and mt[1] == lang.request_ladder)) and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_ladder,
@@ -232,7 +232,7 @@ function command.run(message, mt)
 	  
       
     
-    if (string.lower(mt[1]) == "lab" or string.lower(mt[1]) == "abandoned lab" or mt[1] == "" or (uj.lang ~= "en" and mt[1] == lang.request_lab_1 or mt[1] == lang.request_lab_2)) and wj.labdiscovered  then 
+    if (string.lower(mt[1]) == "lab" or string.lower(mt[1]) == "abandoned lab" or mt[1] == "" or (uj.lang ~= "en" and mt[1] == lang.request_lab_1 or mt[1] == lang.request_lab_2 or mt[1] == lang.request_lab_3)) and wj.labdiscovered  then 
       local laburl = "https://cdn.discordapp.com/attachments/829197797789532181/862885457854726154/lab_scanner.png"
       local labdesc = lang.looking_lab_post_801
       
@@ -297,7 +297,7 @@ function command.run(message, mt)
       }}
     
     
-    elseif (string.lower(mt[1]) == "poster" or string.lower(mt[1]) == "catposter" or string.lower(mt[1]) == "cat poster" or (uj.lang ~= "en" and mt[1] == lang.request_poster_1 or mt[1] == lang.request_poster_2)) and wj.labdiscovered  then 
+    elseif (string.lower(mt[1]) == "poster" or string.lower(mt[1]) == "catposter" or string.lower(mt[1]) == "cat poster" or (uj.lang ~= "en" and mt[1] == lang.request_poster_1 or mt[1] == lang.request_poster_2 or mt[1] == lang.request_poster_3)) and wj.labdiscovered  then 
       if tonumber(wj.ws) ~= 801 then --normal cat poster
         local postermessage = {lang.looking_poster_1, lang.looking_poster_2, lang.looking_poster_3, lang.looking_poster_4, lang.looking_poster_5, lang.looking_poster_6, lang.looking_poster_7, lang.looking_poster_8, lang.looking_poster_9, lang.looking_poster_10, lang.looking_poster_11 }
         local posterimage = {"https://cdn.discordapp.com/attachments/829197797789532181/838962876751675412/poster1.png","https://cdn.discordapp.com/attachments/829197797789532181/839214962786172928/poster3.png","https://cdn.discordapp.com/attachments/829197797789532181/838791958905618462/poster4.png","https://cdn.discordapp.com/attachments/829197797789532181/838799811813441607/poster6.png","https://cdn.discordapp.com/attachments/829197797789532181/838937070616444949/poster7.png","https://cdn.discordapp.com/attachments/829197797789532181/838819064884232233/poster8.png","https://cdn.discordapp.com/attachments/829197797789532181/838799792267067462/poster9.png","https://cdn.discordapp.com/attachments/829197797789532181/838864622878588989/poster10.png","https://cdn.discordapp.com/attachments/829197797789532181/838870206687346768/poster11.png","https://cdn.discordapp.com/attachments/829197797789532181/839214999884398612/poster12.png","https://cdn.discordapp.com/attachments/829197797789532181/839215023662039060/poster13.png"}
@@ -328,7 +328,7 @@ function command.run(message, mt)
         title = lang.looking_at_mousehole,
         description = lang.looking_mousehole,
       }}
-    elseif (string.lower(mt[1]) == "peculiar box" or string.lower(mt[1]) == "box" or string.lower(mt[1]) == "peculiarbox" or (uj.lang ~= "en" and mt[1] == lang.request_box_1 or mt[1] == lang.request_box_2)) and wj.labdiscovered  then 
+    elseif (string.lower(mt[1]) == "peculiar box" or string.lower(mt[1]) == "box" or string.lower(mt[1]) == "peculiarbox" or (uj.lang ~= "en" and mt[1] == lang.request_box_1 or mt[1] == lang.request_box_2 or mt[1] == lang.request_box_3)) and wj.labdiscovered  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_box,
@@ -355,7 +355,7 @@ function command.run(message, mt)
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/look/mountains.json", "")
       
     local request = string.lower(mt[1]) --why tf didint i do this for all the other ones?????????????????
-    if (request == "mountains" or request == "mountain" or request == "windymountains" or request == "the windy mountains" or request == "windy mountains" or mt[1] == "" or (uj.lang ~= "en" and mt[1] == lang.request_mountains_1 or mt[1] == lang.request_mountains_2)) then 
+    if (request == "mountains" or request == "mountain" or request == "windymountains" or request == "the windy mountains" or request == "windy mountains" or mt[1] == "" or (uj.lang ~= "en" and mt[1] == lang.request_mountains_1 or mt[1] == lang.request_mountains_2 or mt[1] == lang.request_mountains_3)) then 
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_mountains,
@@ -380,7 +380,7 @@ function command.run(message, mt)
         title = lang.looking_at_bridge,
         description = lang.looking_bridge,
       }}
-    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and mt[1] == lang.request_shop_1 or mt[1] == lang.request_shop_2)) then 
+    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and mt[1] == lang.request_shop_1 or mt[1] == lang.request_shop_2 or mt[1] == lang.request_shop_3 or mt[1] == lang.request_shop_4)) then 
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_shop,
@@ -417,7 +417,7 @@ function command.run(message, mt)
 	else
 	  _G["request"] = string.lower(args[1]) --why tf didint i do this for all the other ones?????????????????
     end
-	if (request == "shop" or request == "quaintshop" or request == "quaint shop" or request == "" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2))  then
+	if (request == "shop" or request == "quaintshop" or request == "quaint shop" or request == "" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2 or mt[1] == lang.request_shop_3 or mt[1] == lang.request_shop_4))  then
       local time = sw:getTime()
       checkforreload(time:toDays())
 
@@ -545,7 +545,7 @@ function command.run(message, mt)
 
   if not found then ----------------------------------NON-ROOM ITEMS GO HERE!--------------------------------------------------
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/look/nonrooms.json","")
-	if string.lower(mt[1]) == "card factory" or string.lower(mt[1]) == "factory" or string.lower(mt[1]) == "cardfactory" or string.lower(mt[1]) == "the card factory" or (uj.lang ~= "en" and mt[1] == lang.request_factory_1 or mt[1] == lang.request_factory_2) then --TODO: move these to not found
+	if string.lower(mt[1]) == "card factory" or string.lower(mt[1]) == "factory" or string.lower(mt[1]) == "cardfactory" or string.lower(mt[1]) == "the card factory" or (uj.lang ~= "en" and mt[1] == lang.request_factory_1 or mt[1] == lang.request_factory_2 or mt[1] == lang.request_factory_3) then --TODO: move these to not found
       message.channel:send {
         content = lang.looking_factory
       }

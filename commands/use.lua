@@ -26,7 +26,7 @@ function command.run(message, mt,bypass)
   ----------------------------PYROWMID------------------------
   if uj.room == 0 or bypass then
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/pyrowmid/pyrowmid.json","")
-    if request == "strange machine" or request == "machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2) then 
+    if request == "strange machine" or request == "machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2 or request == lang.request_machine_3) then 
       lang = dpf.loadjson("langs/" .. uj.lang .. "/use/pyrowmid/machine.json","")
 	  if not uj.tokens then uj.tokens = 0 end
       if not uj.items then uj.items = {nothing = true} end
@@ -165,7 +165,7 @@ function command.run(message, mt,bypass)
         title = lang.using_table,
         description = lang.use_table,
       }}
-    elseif request == "poster" or request == "catposter" or request == "cat poster" or (uj.lang ~= "en" and request == lang.request_poster_1 or request == lang.request_poster_2) then 
+    elseif request == "poster" or request == "catposter" or request == "cat poster" or (uj.lang ~= "en" and request == lang.request_poster_1 or request == lang.request_poster_2 or request == lang.request_poster_3) then 
       if wj.ws ~= 801 then
         message.channel:send{embed = {
           color = 0x85c5ff,
@@ -200,7 +200,7 @@ function command.run(message, mt,bypass)
           description = lang.use_hole,
         }}
       end
-    elseif request == "peculiar box" or request == "box" or request == "peculiarbox" then 
+    elseif request == "peculiar box" or request == "box" or request == "peculiarbox" or (uj.lang ~= "en" and request == lang.request_box_1 or request == lang.request_box_2 or request == lang.request_box_3) then 
 	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/lab/box.json", "")
       if not uj.lastbox then 
         uj.lastbox = -24
@@ -263,7 +263,7 @@ function command.run(message, mt,bypass)
         wj.boxpool[boxpoolindex] = givecard
         
 		if uj.lang == "ko" then
-          message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. lang.boxed_message_4 .. cdb[getcard].name .. lang.boxed_message_5 .. lang.boxed_message_6 .. getcard .. lang.boxed_message_7)
+          message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. cdb[getcard].name .. lang.boxed_message_4 .. getcard .. lang.boxed_message_5)
 		else
 		  message.channel:send(lang.boxed_message_1 .. uj.id .. lang.boxed_message_2 .. cdb[givecard].name .. lang.boxed_message_3 .. uj.pronouns["their"] .. lang.boxed_message_4 .. cdb[getcard].name .. lang.boxed_message_5 .. uj.pronouns["their"] .. lang.boxed_message_6 .. getcard .. lang.boxed_message_7)
 		end
@@ -454,7 +454,7 @@ o-''|\\_____/)
         title = lang.using_bridge,
         description = lang.use_bridge,
       }}
-    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2))  then 
+    elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2 or request == lang.request_shop_3 or request == lang.request_shop_4))  then 
       message.channel:send(lang.use_shop)
       uj.room = 3
 	  dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
@@ -478,7 +478,7 @@ o-''|\\_____/)
   end
   if (uj.room == 3) then ----------------------------------------------------------SHOP
   local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop/pet.json", "") -- fallback when request is not shop
-    if request == "shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2) then
+    if request == "shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2 or request == lang.request_shop_3 or request == lang.request_shop_4) then
 	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop/buy.json", "")
       checkforreload(time:toDays())
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
@@ -713,7 +713,7 @@ o-''|\\_____/)
   end
   if (not found) and (not bypass) then ----------------------------------NON-ROOM ITEMS GO HERE!-------------------------------------------------
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/nonroom.json","")
-    if request == "token"  then
+    if request == "token" or (uj.lang ~= "en" and request == lang.request_token) then
       if uj.tokens > 0 then
         message.channel:send(lang.tokenflip_1 .. (math.random(2) == 1 and lang.token_heads or lang.token_tails) .. lang.tokenflip_2)
       else

@@ -1,6 +1,4 @@
 {
-	"request_machine_1": "",
-	"request_machine_2": "",
 	"allitems": "You already have every item that is currently available.",
 	"notokens": "You try to turn the crank, but it does not budge. There is a slot above it that looks like it could fit three **Tokens**...",
 	"using_machine": "Using Strange Machine...",
