@@ -60,7 +60,7 @@ function command.run(message, mt,bypass)
           uj.tokens = uj.tokens - 3
           uj.timesused = uj.timesused and uj.timesused + 1 or 1
 		  if uj.lang == "ko" then		    
-		    local dep = {"입금하고", "삽입하고", "넣고", "슬롯에 집어넣고"}
+		    local dep = {"삽입하고", "넣고", "슬롯에 집어넣고"}
 			local cdep = math.random(1, #dep)
 			local speen = {" 돌리", " 사용하", " 회전시키"}
 			local cspeen = math.random(1, #speen)

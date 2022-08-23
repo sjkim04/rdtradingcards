@@ -11,6 +11,7 @@
 	
 	"use_machine_four_1": "Will you put four **Tokens** into the **Strange Machine?** (tokens remaining: ",
 	"use_machine_four_2": ")",
+	"used_machine_ladder": "After depositing 4 **Tokens** and turning the crank, a capsule comes out of the **Strange Machine**. Inside it is the **Ladder!**! You put the **Ladder** in the hole. In addition, the **Strange Machine** seems to have calmed down.",
 	"notokens_four": "You try to turn the crank, but it does not budge. There is a slot above it that looks like it could fit four **Tokens**...",
 	
 	"error_no_tokens": "An error has occured. Please make sure that you have enough tokens!",
