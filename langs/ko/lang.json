@@ -4,5 +4,5 @@
 	"no_database_1": "죄송하지만, ",
 	"no_database_2": "를 데이터베이스에서 찾을 수 없었습니다. 철자가 틀렸는지, 혹은 당신의 언어가 c!langlist에 존재하는지 확인해 주세요.",
 	
-	"langlist_message": "**언어 리스트**\n\n**영어 (English)** (en) - by the RDCards Team\n**한국어 (Korean)** (ko, kr) - by sjk, BIrDIS",
+	"langlist_message": "**언어 리스트**\n\n**영어 (English)** (en) - by the RDCards Team\n**한국어 (Korean)** (ko) - by sjk, BIrDIS (special thanks to BluPen, Mush, and DDockson!)",
 }
