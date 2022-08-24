@@ -8,7 +8,9 @@ function command.run(message, mt)
     uj.lang = "en"
   end
   
-  if mt[1] == "English" or mt[1] == "english" or mt[1] == "en" then
+  local request = string.lower(mt[1])
+  
+  if request == "english" or request == "en" or request == "eng" or request == "영어" then
   uj.lang = "en"
   local lang = dpf.loadjson("langs/" .. uj.lang .. "/lang.json", "")
   local lang_p = dpf.loadjson("langs/" .. uj.lang .. "/pronoun.json", "")
@@ -62,7 +64,7 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang_p.vee_theirself
   end
   message.channel:send(lang.lang_changed)
-  elseif mt[1] == "한국어" or mt[1] == "Korean" or mt[1] == "korean" or mt[1] == "ko" or mt[1] == "kr" then
+  elseif request == "한국어" or request == "korean" or request == "ko" or request == "kr" or request == "kor" then
     uj.lang = "ko"
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/lang.json", "")
 	local lang_p = dpf.loadjson("langs/" .. uj.lang .. "/pronoun.json", "")
@@ -116,10 +118,10 @@ function command.run(message, mt)
     uj.pronouns["theirself"] = lang_p.vee_theirself
   end
     message.channel:send(lang.lang_changed)
-  elseif mt[1] == "" then
+  elseif request == "" then
     message.channel:send(lang.no_value)
   else
-    message.channel:send(lang.no_database_1 ..mt[1].. lang.no_database_2)
+    message.channel:send(lang.no_database_1 .. mt[1] .. lang.no_database_2)
   end
 
   dpf.savejson("savedata/" .. message.author.id .. ".json", uj)
