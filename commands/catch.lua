@@ -56,7 +56,9 @@ function command.run(message, mt)
 
   local item = cardfilename and lang.card or lang.item
   if uj.lang == "ko" then
-    message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. lang.caught_2 .. caughtname .. "** " .. item .. lang.caught_3 .. lang.caught_4)
+    local eul_leul = (item == "카드" and "를" or "을")
+	local eul_leul_2 = (item == "카드" and "가 " or "이 ")
+    message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. eul_leul .. lang.caught_2 .. caughtname .. "** " .. item .. eul_leul_2 .. lang.caught_3)
   else
     message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. lang.caught_2 .. caughtname .. "** " .. item .. lang.caught_3 .. uj.pronouns["their"] .. lang.caught_4)
   end

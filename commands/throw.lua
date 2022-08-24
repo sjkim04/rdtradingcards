@@ -50,12 +50,15 @@ function command.run(message, mt)
   local koitem = cardfilename and kolang.card_thrown or kolang.item_thrown
   local kotrfstring = message.author.mentionString .. "님이 " .. koplace[kocplace] .. " **" .. thrownname .. "** " .. koitem .. koaction[kocaction] .. "!"
   
-  if uj.lang == "ko" then
-	thrownstring = kotrfstring .. kolang.thrown_message_1 .. timeout .. kolang.thrown_message_2
+  if uj.lang ~= "en" then
+    if uj.lang == "ko" then
+		thrownstring = kotrfstring .. lang.thrown_message_1 .. timeout .. lang.thrown_message_2
+	else
+		thrownstring = trf("throw",{ping = message.author.mentionString, name = thrownname}) .. lang.thrown_message_1 .. timeout .. lang.thrown_message_2
+	end
 	thrownstring = thrownstring .. trf("throw",{ping = message.author.mentionString, name = thrownname}) .. enlang.thrown_message_1 .. timeout .. enlang.thrown_message_2
   else
-    thrownstring = trf("throw",{ping = message.author.mentionString, name = thrownname}) .. enlang.thrown_message_1 .. timeout .. enlang.thrown_message_2
-	thrownstring = thrownstring .. kotrfstring .. kolang.thrown_message_1 .. timeout .. kolang.thrown_message_2
+    thrownstring = trf("throw",{ping = message.author.mentionString, name = thrownname}) .. lang.thrown_message_1 .. timeout .. lang.thrown_message_2
   end
   thrownstring = thrownstring .. lang.thrown_command_1 .. (curfilename) .. lang.thrown_command_2
 

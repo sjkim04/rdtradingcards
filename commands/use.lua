@@ -68,7 +68,7 @@ function command.run(message, mt,bypass)
 			local csize = math.random(1, #size)
 			local action = {"나옵니다", "떨어져 나옵니다", "튕겨져 나옵니다", "굴려 나옵니다"}
 			local caction = math.random(1, #action)
-			message.channel:send(lang.used_machine_1 .. dep[cdep] .. speen[cspeen] .. lang.used_machine_2 .. size[csize] .. lang.used_machine_3 .. action[caction] .. lang.used_machine_4 .. itemdb[newitem].name .. lang.used_machine_5 .. itemdb[newitem].name .. lang.used_machine_6)
+			message.channel:send(lang.used_machine_1 .. dep[cdep] .. lang.used_machine_2 .. speen[cspeen] .. lang.used_machine_3 .. size[csize] .. lang.used_machine_4 .. action[caction] .. lang.used_machine_5 .. itemdb[newitem].name .. lang.used_machine_6 .. itemdb[newitem].name .. lang.used_machine_7)
 		  else
 		    message.channel:send(trf("crank") .. itemdb[newitem].name .. lang.used_machine_1 .. itemdb[newitem].name .. lang.used_machine_2)
 		  end
