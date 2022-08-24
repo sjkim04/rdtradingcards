@@ -297,7 +297,7 @@ function command.run(message, mt,bypass)
         --hallway unlocked
       end
       
-    elseif request == "terminal" then 
+    elseif request == "terminal" or (uj.lang ~= "en" and request == lang.request_terminal) then 
 	  local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/lab/terminal.json", "")
       uj.timesused = uj.timesused and uj.timesused + 1 or 1
       if not mt[2] then mt[2] = "" end
@@ -458,7 +458,6 @@ o-''|\\_____/)
       message.channel:send(lang.use_shop)
       uj.room = 3
 	  dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
-	  cmd.look.run(message, {"shop"})
     elseif (request == "barrels" or (uj.lang ~= "en" and request == lang.request_barrels))  then 
       message.channel:send{embed = {
         color = 0x85c5ff,
