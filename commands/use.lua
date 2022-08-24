@@ -44,7 +44,7 @@ function command.run(message, mt,bypass)
           return
         end
         if uj.tokens < 3 then
-          message.channel:send(lang.no_tokens)
+          message.channel:send(lang.notokens)
           return
         end
         if not uj.skipprompts then
@@ -96,7 +96,7 @@ function command.run(message, mt,bypass)
         color = 0x85c5ff,
         title = lang.using_hole,
         description = lang.use_hole_1 .. uj.tokens .. lang.use_hole_2, 
-        },"usehole", {})
+        },"usehole", {}, uj.id, uj.lang)
         return
       else
         message.channel:send(lang.hole_notokens)

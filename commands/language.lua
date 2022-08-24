@@ -119,7 +119,11 @@ function command.run(message, mt)
   end
     message.channel:send(lang.lang_changed)
   elseif request == "" then
-    message.channel:send(lang.no_value)
+    local langname = "English"
+	if uj.lang == "ko" then
+		langname = "한국어"
+	end
+    message.channel:send(lang.no_value_1 .. langname .. lang.no_value_2)
   else
     message.channel:send(lang.no_database_1 .. mt[1] .. lang.no_database_2)
   end

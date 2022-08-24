@@ -63,7 +63,7 @@ function command.run(message, mt)
 	if uj.lang == "ko" then
 		message.channel:send(lang.stored_message_1 .. uj.id .. lang.stored_message_2 .. lang.stored_message_3 .. lang.stored_message_4 .. cdb[item1].name .. lang.stored_message_5 .. numcards .. lang.stored_message_6)
 	else
-		message.channel:send(lang.stored_message_1 .. uj.id .. lang.stored_message_2 .. uj.pronouns["their"] .. lang.stored_message_3 .. numcards .. lang.stored_message_4 .. cdb[item1].name .. lang.stored_message_5 .. (numcards == 1 and "" or lang.needs_plural_s == "true" and lang.plural_s) .. lang.stored_message_6)
+		message.channel:send(lang.stored_message_1 .. uj.id .. lang.stored_message_2 .. uj.pronouns["their"] .. lang.stored_message_3 .. numcards .. lang.stored_message_4 .. cdb[item1].name .. lang.stored_message_5 .. (numcards == 1 and "" or lang.needs_plural_s == true and lang.plural_s) .. lang.stored_message_6)
     end
 	dpf.savejson(ujf, uj)
     cmd.checkcollectors.run(message, mt)

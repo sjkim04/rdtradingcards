@@ -22,7 +22,7 @@ function reaction.run(message, interaction, data, response)
     else
       interaction:reply{embed = {
         color = 0x85c5ff,
-        title = "Using Terminal...",
+        title = lang.using_terminal,
         description = lang.donated_terminal_1 .. wj.tokensdonated .. lang.donated_terminal_2,
         image = {
           url = upgradeimages[math.random(#upgradeimages)]

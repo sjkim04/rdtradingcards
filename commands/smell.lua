@@ -93,12 +93,28 @@ function command.run(message, mt)
       s7booster = lang.smell_s7booster
     }
 
-    if request == "strange machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2 or request == lang.request_machine_3) then
+    if uj.lang ~= "en" and request == lang.request_panda then
+      request = "panda"
+	elseif uj.lang ~= "en" and request == lang.request_pyrowmid then
+      request = "pyrowmid"
+	elseif uj.lang ~= "en" and request == lang.request_throne then
+      request = "throne"
+	elseif request == "strange machine" or (uj.lang ~= "en" and request == lang.request_machine_1 or request == lang.request_machine_2 or request == lang.request_machine_3) then
       request = "machine"
+	elseif uj.lang ~= "en" and request == lang.request_token then
+      request = "token"
+	elseif request == "card factory" or request == "cardfactory" or (uj.lang ~= "en" and request == lang.request_factory_1 or request == lang.request_factory_2 or request == lang.request_factory_3) then
+      request = "factory"
+	elseif uj.lang ~= "en" and request == lang.request_ladder then
+      request = "ladder"
+	elseif uj.lang ~= "en" and request == lang.request_hole then
+      request = "hole"
     elseif request == "abandoned lab" or (uj.lang ~= "en" and request == lang.request_lab_1 or request == lang.request_lab_2 or request == lang.request_lab_3) then
       request = "lab"
     elseif request == "database" or (uj.lang ~= "en" and request == lang.request_terminal_1 or request == lang.request_terminal_2) then
       request = "terminal"
+	elseif uj.lang ~= "en" and request == lang.request_table then
+      request = "table"
     elseif request == "cat poster" or (uj.lang ~= "en" and request == lang.request_poster_1 or request == lang.request_poster_2 or request == lang.request_poster_3) then
       request = "poster"
     elseif request == "mouse hole" or request == "mouse" or (uj.lang ~= "en" and request == lang.request_mousehole_1 or request == lang.request_mousehole_2 or request == lang.request_mousehole_3) then
@@ -107,8 +123,20 @@ function command.run(message, mt)
       request = "box"
     elseif request == "windymountains" or request == "windy mountains" or (uj.lang ~= "en" and request == lang.request_mountains_1 or request == lang.request_mountains_2 or request == lang.request_mountains_3) then
       request = "mountains"
+	elseif uj.lang ~= "en" and request == lang.request_bridge then
+      request = "bridge"
     elseif request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2 or request == lang.request_shop_3 or request == lang.request_shop_4) then
       request = "shop"
+	elseif uj.lang ~= "en" and request == lang.request_barrels then
+      request = "barrels"
+	elseif uj.lang ~= "en" and request == lang.request_panda then
+      request = "clouds"
+	elseif uj.lang ~= "en" and request == lang.request_wolf then
+      request = "wolf"
+	elseif uj.lang ~= "en" and request == lang.request_ghost then
+      request = "ghost"
+	elseif uj.lang ~= "en" and request == lang.request_photo then
+      request = "photo"
     end
     
     
@@ -139,7 +167,7 @@ function command.run(message, mt)
           message.channel:send(lang.dont_have_card_1 .. cdb[curfilename].name .. lang.dont_have_card_2)
         end
       end
-
+	
     elseif (request == "spiderweb" or request == "spider web" or request == "web" or (uj.lang ~= "en" and request == lang.request_spider_1 or request == lang.request_spider_2)) and wj.smellable then
       ynbuttons(message, lang.spider_alert,"spidersmell",{},uj.id,uj.lang)
     elseif hcsmells[request] then
