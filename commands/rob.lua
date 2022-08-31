@@ -17,9 +17,6 @@ local time = sw:getTime()
     return
   end
   
-  if #mt == 2 and mt[2] == 0 then
-    message.channel:send("What did you try to steal?")
-  
   if not uj.lastrob then
     uj.lastrob = 0
   end
@@ -38,7 +35,7 @@ local time = sw:getTime()
   if not uj.skipprompts then
     ynbuttons("Are you sure you want to rob the **Quaint Shop**?","rob",{robmt = mt}, uj.id, uj.lang)
   else
-      if #mt > 1 and mt[2] ~= 1then
+      if #mt > 1 and mt[2] ~= 1 then
         message.channel:send("You enter the **Quaint Shop** with your mask on to steal some things, but you realize you can't hold that many. You ended up leaving the shop with your hands empty, and the **Wolf** blacklists you from the shop for the next 3 restocks anyway.")
         uj.lastrob = sj.stocknum
       else
