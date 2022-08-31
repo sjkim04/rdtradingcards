@@ -12,9 +12,16 @@ local time = sw:getTime()
     return
   end
   
-  if #mt == 0 then
-    message.channel:send(lang.no_arguments)
-    return
+  local srequest
+  local sname
+  local stock
+  local sindex
+  local numrequest = 1
+
+  if tonumber(mt[2]) then
+    if tonumber(mt[2]) > 1 then
+      numrequest = math.floor(mt[3])
+    end
   end
   
   if not uj.lastrob then
@@ -31,22 +38,83 @@ local time = sw:getTime()
     message.channel:send("You are blacklisted from the **Quaint Shop** for " .. stockstring .. ".")
     return
   end
-  
-  if not uj.skipprompts then
-    ynbuttons("Are you sure you want to rob the **Quaint Shop**?","rob",{robmt = mt}, uj.id, uj.lang)
-  else
-      if #mt > 1 and mt[2] ~= 1 then
-        message.channel:send("You enter the **Quaint Shop** with your mask on to steal some things, but you realize you can't hold that many. You ended up leaving the shop with your hands empty, and the **Wolf** blacklists you from the shop for the next 3 restocks anyway.")
-        uj.lastrob = sj.stocknum
+
+  --error handling
+  local sendshoperror = {
+    outofstock = function()
+      message.channel:send("The **Wolf** frowns. It is currently out of stock of **" .. sname .. "**.")
+    end,
+
+    toomanyrequested = function()
+        message.channel:send("The **Wolf** frowns. You can only buy " .. stock .. lang.too_many_requested_2 .. sname .. lang.too_many_requested_3)
+    end,
+
+    donthave = function()
+      if nopeeking then
+        message.channel:send(lang.nopeeking_error_1 .. mt[2] .. lang.nopeeking_error_2)
       else
-        message.channel:send("You robbed something from the **Quaint Shop**. You are blacklisted from the shop for the next 3 restocks.")
-        uj.lastrob = sj.stocknum
+        message.channel:send(lang.donthave_1 .. sname .. lang.donthave_2)
       end
-    --if not uj.togglechecktoken then
-    --  message.channel:send(lang.checktoken_1 .. uj.tokens .. lang.checktoken_2 .. (uj.tokens ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.checktoken_3)
-    --end
+    end,
+
+    alreadyhave = function()
+      message.channel:send(lang.alreadyhave_1 .. sname .. lang.alreadyhave_2)
+    end,
+      
+    hasfixedmouse = function()
+      message.channel:send(lang.hasfixedmouse)
+    end,
+
+    oneitemonly = function()
+      message.channel:send(lang.oneitemonly)
+    end,
+
+    unknownrequest = function()
+      if nopeeking then
+        message.channel:send(lang.nopeeking_error_1 .. mt[2] .. lang.nopeeking_error_2)
+      else
+        message.channel:send(lang.unknownrequest_1 .. mt[2] .. lang.unknownrequest_2)
+      end
+    end
+  }
+
+  if not mt[1] or mt[1] == "" then
+    message.channel:send("random picker")
+  else
+    if constexttofn(mt[1]) then
+      srequest = constexttofn(mt[1])
+      sname = consdb[srequest].name
+
+      for i,v in ipairs(sj.consumables) do
+        if v.name == srequest then
+          sindex = i
+          break
+        end
+      end
+
+      if not sindex then
+        sendshoperror["donthave"]()
+        return
+      end
+
+      stock = sj.consumables[sindex].stock
+      if stock <= 0 then
+        sendshoperror["outofstock"]()
+        return
+      end
+
+      if numrequest > stock then
+        sendshoperror["toomanyrequested"]()
+        return
+      end
+    
+      -- can rob consumable
+      ynbuttons(message,"Are you sure you want to rob " .. numrequest .. " **" .. sname .. "** from the **Quaint Shop**? This will **blacklist you from the shop** for a few days!","rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
+    else
+      message.channel:send("you asked for something other than consumables")
+    end
   end
-  
+
   dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
 end
 return command
