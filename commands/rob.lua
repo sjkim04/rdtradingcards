@@ -20,7 +20,7 @@ local time = sw:getTime()
 
   if tonumber(mt[2]) then
     if tonumber(mt[2]) > 1 then
-      numrequest = math.floor(mt[3])
+      numrequest = math.floor(mt[2])
     end
   end
   

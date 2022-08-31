@@ -19,18 +19,18 @@ function reaction.run(message, interaction, data, response)
         print("robchance: " .. robchance)
         if robchance == 1 then
           print("rob succeded")
-          sj.consumables[data.sindex].stock = sj.consumables[data.sindex].stock - 1
+          sj.consumables[data.sindex].stock = sj.consumables[data.sindex].stock - data.numrequest
           if not uj.consumables then uj.consumables = {} end
-          local adding = consdb[data.srequest].quantity or 1
+          local adding = (consdb[data.srequest].quantity or 1) * data.numrequest
           if not uj.consumables[data.srequest] then
             uj.consumables[data.srequest] = adding
           else
             uj.consumables[data.srequest] = uj.consumables[data.srequest] + adding
           end
-          message.channel:send("You entered the **Quaint Shop** with your mask. You asked for 1 **" .. data.sname .. "**. The **Wolf** complies.\nAfter you leave, the Wolf calls the police. You are blacklisted from the shop for the next 3 restocks.")
+          message.channel:send("You entered the **Quaint Shop** with your mask. You asked for " .. data.numrequest .. " **" .. data.sname .. "**. The **Wolf** complies.\nAfter you leave, the Wolf calls the police. You are blacklisted from the shop for the next 3 restocks.")
         else
           print("rob failed")
-          message.channel:send("You entered the **Quaint Shop** with your mask. You asked for 1 **" .. data.sname .. "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.")
+          message.channel:send("You entered the **Quaint Shop** with your mask. You asked for " .. data.numrequest .. " **" .. data.sname .. "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.")
         end
       else
         message.channel:send("You robbed something from the **Quaint Shop**. You are blacklisted from the shop for the next 3 restocks.")
