@@ -114,7 +114,5 @@ local time = sw:getTime()
       message.channel:send("you asked for something other than consumables")
     end
   end
-
-  dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
 end
 return command
