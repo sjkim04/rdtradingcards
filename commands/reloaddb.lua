@@ -54,6 +54,7 @@ function command.run(message, mt, overwrite)
       lastprayer = -7,
       lastequip = -24,
       lastbox = -24,
+      lastrob = 0,
       tokens = 0,
       pronouns = {
         selection = "they",
