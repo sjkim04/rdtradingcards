@@ -111,7 +111,7 @@ function command.run(message, mt)
     ynbuttons(message,{
       color = 0x85c5ff,
       title = "Robbing Quaint Shop...",
-      description = "Are you sure you want to rob the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
+      description = "Are you sure you want to rob something from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
     },"rob",{random=true}, uj.id, uj.lang)
     return
   else
@@ -131,6 +131,7 @@ function command.run(message, mt)
         return
       end
 
+      sprice = sj.consumables[sindex].price
       stock = sj.consumables[sindex].stock
       if stock <= 0 then
         sendshoperror["outofstock"]()
@@ -147,13 +148,14 @@ function command.run(message, mt)
         color = 0x85c5ff,
         title = "Robbing " .. sname .. "...",
         description = "_The description on the back reads:_\n`" .. consdb[srequest].description .. "`\nAre you sure you want to rob " .. numrequest .. " **" .. sname .. "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
-      },"rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      },"rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,sprice=sprice,numrequest=numrequest, random=false}, uj.id, uj.lang)
       return
     end
 
     if itemtexttofn(mt[1]) then
       srequest = itemtexttofn(mt[1])
       sname = itemdb[srequest].name
+      sprice = sj.itemprice
 
       if srequest ~= sj.item then
         sendshoperror["donthave"]()
@@ -185,7 +187,7 @@ function command.run(message, mt)
         color = 0x85c5ff,
         title = "Robbing " .. sname .. "...",
         description = "_The description on the back reads:_\n`" .. itemdb[srequest].description .. "`\nAre you sure you want to rob the **" .. sname .. "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
-      },"rob",{itemtype = "item",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      },"rob",{itemtype = "item",sname=sname,srequest=srequest,sprice=sprice,random=false}, uj.id, uj.lang)
       return
     end
 
