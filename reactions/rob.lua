@@ -2,8 +2,7 @@ local reaction = {}
 function reaction.run(message, interaction, data, response)
   local ujf = "savedata/" .. message.author.id .. ".json"
   local uj = dpf.loadjson(ujf, defaultjson)
-  --local lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json", "")
-  local lang = dpf.loadjson("langs/en/rob.json", "")
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json", "")
   local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
   print("Loaded uj")
 
@@ -99,8 +98,13 @@ function reaction.run(message, interaction, data, response)
         interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
       else
         print("rob failed")
-        interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
+        if uj.lang == "ko" then
+          interaction:reply(lang.rob_failed_1 .. data.sname .. lang.rob_failed_2 .. data.numrequest .. lang.cons_unit .. lang.rob_failed_3)
+        else
+          interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
+        end
         uj.lastrob = sj.stocknum
+        uj.room = 2
       end
     end
     if data.itemtype == "card" then
@@ -150,11 +154,16 @@ function reaction.run(message, interaction, data, response)
         else
           uj.inventory[data.srequest] = uj.inventory[data.srequest] + data.numrequest
         end
-        interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
+        if uj.lang == "ko" then
+          interaction:reply(lang.rob_succeeded_1 .. data.sname .. lang.rob_succeeded_2 .. data.numrequest .. lang.card_unit .. lang.rob_succeeded_3)
+        else
+          interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
+        end
       else
         print("rob failed")
         interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
         uj.lastrob = sj.stocknum
+        uj.room = 2
       end
     end
     if data.itemtype == "item" then
@@ -168,6 +177,7 @@ function reaction.run(message, interaction, data, response)
         print("rob failed")
         interaction:reply(lang.rob_failed_item_1 .. data.sname .. lang.rob_failed_item_2)
         uj.lastrob = sj.stocknum
+        uj.room = 2
       end
     end
     

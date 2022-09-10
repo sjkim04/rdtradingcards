@@ -486,10 +486,9 @@ o-''|\\_____/)
     elseif (request == "shop" or request == "quaintshop" or request == "quaint shop" or (uj.lang ~= "en" and request == lang.request_shop_1 or request == lang.request_shop_2 or request == lang.request_shop_3 or request == lang.request_shop_4))  then 
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
       if uj.lastrob + 4 > sj.stocknum and uj.lastrob ~= 0 then
-        --lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
-        lang = dpf.loadjson("langs/en/rob.json")
+        lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
         local stocksleft = uj.lastrob + 3 - sj.stocknum
-        local stockstring = stocksleft .. lang.more_restock
+        local stockstring = lang.more_restock_1 .. stocksleft .. lang.more_restock_2
         if lang.needs_plural_s == true then
           if stocksleft > 1 then
             stockstring = stockstring .. lang.plural_s
@@ -551,10 +550,9 @@ o-''|\\_____/)
     local lang = dpf.loadjson("langs/" .. uj.lang .. "/use/shop/pet.json", "") -- fallback when request is not shop
     local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
     if uj.lastrob + 4 > sj.stocknum and uj.lastrob ~= 0 then
-      --lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
-      lang = dpf.loadjson("langs/en/rob.json")
+      lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
       local stocksleft = uj.lastrob + 3 - sj.stocknum
-      local stockstring = stocksleft .. lang.more_restock
+      local stockstring = lang.more_restock_1 .. stocksleft .. lang.more_restock_2
       if lang.needs_plural_s == true then
         if stocksleft > 1 then
           stockstring = stockstring .. lang.plural_s

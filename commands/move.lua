@@ -47,11 +47,10 @@ function command.run(message, mt)
       message.channel:send(lang.already_in_1 .. locations[newroom+1] .. lang.already_in_2)
       return
     elseif newroom == 3 and uj.lastrob + 4 > dpf.loadjson("savedata/shop.json", defaultshopsave).stocknum and uj.lastrob ~= 0 then
-      --lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
+      lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
-      local lang = dpf.loadjson("langs/en/rob.json")
       local stocksleft = uj.lastrob + 3 - sj.stocknum
-      local stockstring = stocksleft .. lang.more_restock
+      local stockstring = lang.more_restock_1 .. stocksleft .. lang.more_restock_2
       if lang.needs_plural_s == true then
         if stocksleft > 1 then
           stockstring = stockstring .. lang.plural_s

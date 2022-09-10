@@ -5,8 +5,7 @@ function command.run(message, mt)
   print(message.author.name .. " did !rob")
   local uj = dpf.loadjson("savedata/" .. message.author.id .. ".json", defaultjson)
   local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)  
-  --local lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json", "")
-  local lang = dpf.loadjson("langs/en/rob.json", "")
+  local lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json", "")
   
   if not message.guild then
     message.channel:send(lang.dm_message)
@@ -32,7 +31,7 @@ function command.run(message, mt)
 
   if uj.lastrob + 4 > sj.stocknum and uj.lastrob ~= 0 then
     local stocksleft = uj.lastrob + 3 - sj.stocknum
-    local stockstring = stocksleft .. lang.more_restock
+    local stockstring = lang.more_restock_1 .. stocksleft .. lang.more_restock_2
     if lang.needs_plural_s == true then
       if stocksleft > 1 then
         stockstring = stockstring .. lang.plural_s
@@ -68,6 +67,11 @@ function command.run(message, mt)
     return
   end
 
+  local newuj = automove(uj.room,"rob",message)
+	  if newuj then
+		  uj = newuj
+	end
+
   --error handling
   local sendshoperror = {
     outofstock = function()
@@ -75,7 +79,11 @@ function command.run(message, mt)
     end,
 
     toomanyrequested = function()
+      if uj.lang == "ko" then
+        message.channel:send(lang.too_many_requested_1 .. sname .. lang.too_many_requested_2 .. stock .. lang.too_many_requested_3)
+      else
         message.channel:send(lang.too_many_requested_1 .. stock .. lang.too_many_requested_2 .. sname .. lang.too_many_requested_3)
+      end
     end,
 
     donthave = function()
@@ -144,11 +152,19 @@ function command.run(message, mt)
       end
     
       -- can rob consumable
-      ynbuttons(message,{
-        color = 0x85c5ff,
-        title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
-        description = "_" .. lang.rob_shop_desc .. "_\n`" .. consdb[srequest].description .. "`\n" .. lang.rob_shop_1 .. numrequest .. lang.rob_shop_2 .. sname .. lang.rob_shop_3
-      },"rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,sprice=sprice,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      if uj.lang == "ko" then
+        ynbuttons(message,{
+          color = 0x85c5ff,
+          title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+          description = "_" .. lang.rob_shop_desc .. "_\n`" .. consdb[srequest].description .. "`\n" .. lang.rob_shop_1 ..sname .. lang.rob_shop_2 .. numrequest .. lang.cons_unit .. lang.rob_shop_3
+        },"rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,sprice=sprice,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      else
+        ynbuttons(message,{
+          color = 0x85c5ff,
+          title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+          description = "_" .. lang.rob_shop_desc .. "_\n`" .. consdb[srequest].description .. "`\n" .. lang.rob_shop_1 .. numrequest .. lang.rob_shop_2 .. sname .. lang.rob_shop_3
+        },"rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,sprice=sprice,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      end
       return
     end
 
@@ -220,11 +236,19 @@ function command.run(message, mt)
       end
 
       --can buy card
-      ynbuttons(message,{
-        color = 0x85c5ff,
-        title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
-        description = "_" .. lang.rob_shop_desc .. "_\n`" .. cdb[srequest].description  .. "`\n" .. lang.rob_shop_1 .. numrequest .. lang.rob_shop_2 .. sname .. lang.rob_shop_3
-      },"rob",{itemtype = "card",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      if uj.lang == "ko" then
+        ynbuttons(message,{
+          color = 0x85c5ff,
+          title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+          description = "_" .. lang.rob_shop_desc .. "_\n`" .. cdb[srequest].description  .. "`\n" .. lang.rob_shop_1 .. sname .. lang.rob_shop_2 .. numrequest .. lang.card_unit .. lang.rob_shop_3
+        },"rob",{itemtype = "card",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      else
+        ynbuttons(message,{
+          color = 0x85c5ff,
+          title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+          description = "_" .. lang.rob_shop_desc .. "_\n`" .. cdb[srequest].description  .. "`\n" .. lang.rob_shop_1 .. numrequest .. lang.rob_shop_2 .. sname .. lang.rob_shop_3
+        },"rob",{itemtype = "card",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
+      end
       return
     end
     sendshoperror["unknownrequest"]()
