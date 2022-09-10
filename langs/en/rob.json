@@ -9,6 +9,10 @@
 	"time_and": " and ",
 	"time_minute": " minute",
 
+	"blacklist_next_1": "You will be able to access the **Quaint Shop** after the next restock. The shop will be restocked in ",
+	"blacklist_next_2": ".",
+	"blacklist_1": "You are blacklisted from the **Quaint Shop** for ",
+	"blacklist_2": ".",
 	
 	"out_of_stock_1": "The **Wolf** frowns. It is currently out of stock of **",
 	"out_of_stock_2": "**.",
@@ -32,4 +36,37 @@
 	
 	"unknownrequest_1": "The **Wolf** looks at you with confusion. It does not appear to know what ",
 	"unknownrequest_2": " is.",
+
+	"robbing_shop_random": "Robbing Quaint Shop...",
+	"rob_shop_random": "Are you sure you want to rob something from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!",
+
+	"robbing_shop_1": "Robbing ",
+	"robbing_shop_2": "...",
+	"rob_shop_desc": "The description on the back reads:",
+
+	"rob_shop_1": "Are you sure you want to rob ",
+	"rob_shop_2": " **",
+	"rob_shop_3": "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!",
+
+	"rob_shop_item_1": "Are you sure you want to rob the **",
+	"rob_shop_item_2": "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!",
+
+	"error_already_robbed": "An error has occured. Make sure you recently haven't robbed the shop!",
+
+	"rob_succeeded_1": "You entered the **Quaint Shop** with your mask. You asked for ",
+	"rob_succeeded_2": " **",
+	"rob_succeeded_3": "**. The **Wolf** complies.",
+
+	"rob_succeeded_item_1": "You entered the **Quaint Shop** with your mask. You asked for a **",
+	"rob_succeeded_item_2": "**. The **Wolf** complies.",
+
+	"rob_failed_1": "You entered the **Quaint Shop** with your mask. You asked for ",
+	"rob_failed_2": " **",
+	"rob_failed_3": "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.",
+
+	"rob_failed_item_1": "You entered the **Quaint Shop** with your mask. You asked for a **",
+	"rob_failed_item_2": "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.",
+
+	"rob_cancelled_1": "<@",
+	"rob_cancelled_2": "> has stopped robbing the **Quaint Shop**. For now...",
 }

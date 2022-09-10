@@ -3,13 +3,14 @@ function reaction.run(message, interaction, data, response)
   local ujf = "savedata/" .. message.author.id .. ".json"
   local uj = dpf.loadjson(ujf, defaultjson)
   --local lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json", "")
+  local lang = dpf.loadjson("langs/en/rob.json", "")
   local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
   print("Loaded uj")
 
   if response == "yes" then
     print('user1 has accepted')
     if uj.lastrob + 3 > sj.stocknum and uj.lastrob ~= 0 then
-      interaction:reply("An error has occured. Make sure you recently haven't robbed the shop!")
+      interaction:reply(lang.error_already_robbed)
       return
     end
 
@@ -28,7 +29,7 @@ function reaction.run(message, interaction, data, response)
       end
       for i,v in ipairs(sj.consumables) do
         if v.stock > 0 then
-          itemtypes[#itemtypes + 1] = "cons"
+          itemtypes[#itemtypes + 1] = "consumable"
         end
       end
 
@@ -39,10 +40,9 @@ function reaction.run(message, interaction, data, response)
           data.srequest = sj.item
           data.sname = itemdb[data.srequest].name
           data.sprice = sj.itemprice
-          data.numrequest = 1
         end
 
-        if data.itemtype == "cons" then
+        if data.itemtype == "consumable" then
           local conslist = {}
           for i,v in ipairs(sj.consumables) do
             if v.stock > 0 then
@@ -53,12 +53,12 @@ function reaction.run(message, interaction, data, response)
           data.sname = consdb[data.srequest].name
           data.numrequest = 1
           for i,v in ipairs(sj.consumables) do
-            if v.name == srequest then
+            if v.name == data.srequest then
               data.sindex = i
               break
             end
           end
-          data.sprice = sj.consumables[sindex].price
+          data.sprice = sj.consumables[data.sindex].price
         end
 
         if data.itemtype == "card" then
@@ -72,12 +72,12 @@ function reaction.run(message, interaction, data, response)
           data.sname = cdb[data.srequest].name
           data.numrequest = 1
           for i,v in ipairs(sj.cards) do
-            if v.name == srequest then
+            if v.name == data.srequest then
               data.sindex = i
               break
             end
           end
-          data.sprice = sj.cards[sindex].price
+          data.sprice = sj.cards[data.sindex].price
         end
       else
         print("shoprobtime")
@@ -87,7 +87,7 @@ function reaction.run(message, interaction, data, response)
     if data.itemtype == "consumable" then
       local robchance = math.random(1,data.sprice+data.numrequest)
       if robchance == 1 then
-        print("rob succeded")
+        print("rob succeeded")
         sj.consumables[data.sindex].stock = sj.consumables[data.sindex].stock - data.numrequest
         if not uj.consumables then uj.consumables = {} end
         local adding = (consdb[data.srequest].quantity or 1) * data.numrequest
@@ -96,10 +96,10 @@ function reaction.run(message, interaction, data, response)
         else
           uj.consumables[data.srequest] = uj.consumables[data.srequest] + adding
         end
-        message.channel:send("You entered the **Quaint Shop** with your mask. You asked for " .. data.numrequest .. " **" .. data.sname .. "**. The **Wolf** complies.")
+        interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
       else
         print("rob failed")
-        message.channel:send("You entered the **Quaint Shop** with your mask. You asked for " .. data.numrequest .. " **" .. data.sname .. "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.")
+        interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
         uj.lastrob = sj.stocknum
       end
     end
@@ -107,32 +107,32 @@ function reaction.run(message, interaction, data, response)
       local robsucceed = false
       if cdb[data.srequest].type == "Rare" then
         local robchance = math.random(1,100)
-        if robchance < 0 - 10 * (data.numrequest - 1) then
+        if robchance < 90 - 5 * (data.numrequest > 18 and 17 or data.numrequest - 1) then
           robsucceed = true
         end
       elseif cdb[data.srequest].type == "Super Rare" then
         local robchance = math.random(1,100)
-        if robchance < 70 - 10 * (data.numrequest - 1) then
+        if robchance < 70 - 5 * (data.numrequest > 14 and 13 or data.numrequest - 1) then
           robsucceed = true
         end
       elseif cdb[data.srequest].type == "Ultra Rare" then
         local robchance = math.random(1,100)
-        if robchance < 50 - 5 * (data.numrequest - 1) then
+        if robchance < 50 - 5 * (data.numrequest > 10 and 9 or data.numrequest - 1) then
           robsucceed = true
         end
       elseif cdb[data.srequest].type == "Alternate" or cdb[data.srequest].type == "Discontinued" then
         local robchance = math.random(1,100)
-        if robchance < 30 - 3 * (data.numrequest - 1) then
+        if robchance < 30 - 3 * (data.numrequest > 10 and 9 or data.numrequest - 1) then
           robsucceed = true
         end
       elseif cdb[data.srequest].type == "Discontinued Rare" then
         local robchance = math.random(1,100)
-        if robchance < 20 - 3 * (data.numrequest - 1) then
+        if robchance < 20 - 3 * (data.numrequest > 7 and 6 or data.numrequest - 1) then
             robsucceed = true
         end
       elseif cdb[data.srequest].type == "Discontinued Super Rare" then
         local robchance = math.random(1,100)
-        if robchance < 15 - 2 * (data.numrequest - 1) then
+        if robchance < 15 - 2 * (data.numrequest > 8 and 7 or data.numrequest - 1) then
           robsucceed = true
         end
       elseif cdb[data.srequest].type == "Discontinued Ultra Rare" or cdb[data.srequest].type == "Discontinued Alternate" or cdb[data.srequest].type == "Alternate Alternate" then
@@ -150,23 +150,23 @@ function reaction.run(message, interaction, data, response)
         else
           uj.inventory[data.srequest] = uj.inventory[data.srequest] + data.numrequest
         end
-        message.channel:send("You entered the **Quaint Shop** with your mask. You asked for " .. data.numrequest .. " **" .. data.sname .. "**. The **Wolf** complies.")
+        interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
       else
         print("rob failed")
-        message.channel:send("You entered the **Quaint Shop** with your mask. You asked for " .. data.numrequest .. " **" .. data.sname .. "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.")
+        interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
         uj.lastrob = sj.stocknum
       end
     end
     if data.itemtype == "item" then
-      local robchance = math.random(1,data.sprice+data.numrequest)
+      local robchance = math.random(1,data.sprice)
       if robchance == 1 then
         print("rob succeded")
         sj.itemstock = sj.itemstock - 1
         uj.items[data.srequest] = true
-        message.channel:send("You entered the **Quaint Shop** with your mask. You asked for a **" .. data.sname .. "**. The **Wolf** complies.")
+        interaction:reply(lang.rob_succeeded_item_1 .. data.sname .. lang.rob_succeeded_item_2)
       else
         print("rob failed")
-        message.channel:send("You entered the **Quaint Shop** with your mask. You asked for a **" .. data.sname .. "**. The **Wolf** calls the police instead. You are blacklisted from the shop for the next 3 restocks.")
+        interaction:reply(lang.rob_failed_item_1 .. data.sname .. lang.rob_failed_item_2)
         uj.lastrob = sj.stocknum
       end
     end
@@ -177,7 +177,7 @@ function reaction.run(message, interaction, data, response)
 
   if response == "no" then
     print('user1 has denied')
-    interaction:reply("<@" .. uj.id .. "> has stopped robbing the **Quaint Shop**. For now...")
+    interaction:reply(lang.rob_cancelled_1 .. uj.id .. lang.rob_cancelled_2)
   end
 end
 return reaction

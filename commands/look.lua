@@ -436,9 +436,9 @@ function command.run(message, mt)
             end
           end
         end
-        message.channel:send("You will be able to access the **Quaint Shop** after the next restock. The shop will be restocked in " .. durationtext .. ".")
+        message.channel:send(lang.blacklist_next_1 .. durationtext .. lang.blacklist_next_2)
       else
-        message.channel:send("You are blacklisted from the **Quaint Shop** for " .. stockstring .. ".")
+        message.channel:send(lang.blacklist_1 .. stockstring .. lang.blacklist_2)
       end
       uj.room = 2
       return

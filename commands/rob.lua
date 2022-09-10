@@ -61,9 +61,9 @@ function command.run(message, mt)
           end
         end
       end
-      message.channel:send("You will be able to access the **Quaint Shop** after the next restock. The shop will be restocked in " .. durationtext .. ".")
+      message.channel:send(lang.blacklist_next_1 .. durationtext .. lang.blacklist_next_2)
     else
-      message.channel:send("You are blacklisted from the **Quaint Shop** for " .. stockstring .. ".")
+      message.channel:send(lang.blacklist_1 .. stockstring .. lang.blacklist_2)
     end
     return
   end
@@ -110,8 +110,8 @@ function command.run(message, mt)
   if not mt[1] or mt[1] == "" then
     ynbuttons(message,{
       color = 0x85c5ff,
-      title = "Robbing Quaint Shop...",
-      description = "Are you sure you want to rob something from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
+      title = lang.robbing_shop_random,
+      description = lang.rob_shop_random
     },"rob",{random=true}, uj.id, uj.lang)
     return
   else
@@ -146,8 +146,8 @@ function command.run(message, mt)
       -- can rob consumable
       ynbuttons(message,{
         color = 0x85c5ff,
-        title = "Robbing " .. sname .. "...",
-        description = "_The description on the back reads:_\n`" .. consdb[srequest].description .. "`\nAre you sure you want to rob " .. numrequest .. " **" .. sname .. "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
+        title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+        description = "_" .. lang.rob_shop_desc .. "_\n`" .. consdb[srequest].description .. "`\n" .. lang.rob_shop_1 .. numrequest .. lang.rob_shop_2 .. sname .. lang.rob_shop_3
       },"rob",{itemtype = "consumable",sname=sname,sindex=sindex,srequest=srequest,sprice=sprice,numrequest=numrequest, random=false}, uj.id, uj.lang)
       return
     end
@@ -185,8 +185,8 @@ function command.run(message, mt)
       --can buy item
       ynbuttons(message,{
         color = 0x85c5ff,
-        title = "Robbing " .. sname .. "...",
-        description = "_The description on the back reads:_\n`" .. itemdb[srequest].description .. "`\nAre you sure you want to rob the **" .. sname .. "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
+        title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+        description = "_" .. lang.rob_shop_desc .. "_\n`" .. itemdb[srequest].description .. "`\n" .. lang.rob_shop_item_1 .. sname .. lang.rob_shop_item_2
       },"rob",{itemtype = "item",sname=sname,srequest=srequest,sprice=sprice,random=false}, uj.id, uj.lang)
       return
     end
@@ -222,8 +222,8 @@ function command.run(message, mt)
       --can buy card
       ynbuttons(message,{
         color = 0x85c5ff,
-        title = "Robbing " .. sname .. "...",
-        description = "_The description on the back reads:_\n`" .. cdb[srequest].description .. "`\nAre you sure you want to rob " .. numrequest .. " **" .. sname .. "** from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!"
+        title = lang.robbing_shop_1 .. sname .. lang.robbing_shop_2,
+        description = "_" .. lang.rob_shop_desc .. "_\n`" .. cdb[srequest].description  .. "`\n" .. lang.rob_shop_1 .. numrequest .. lang.rob_shop_2 .. sname .. lang.rob_shop_3
       },"rob",{itemtype = "card",sname=sname,sindex=sindex,srequest=srequest,numrequest=numrequest, random=false}, uj.id, uj.lang)
       return
     end
