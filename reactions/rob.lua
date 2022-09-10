@@ -31,6 +31,7 @@ function reaction.run(message, interaction, data, response)
       for i,v in ipairs(sj.consumables) do
         if v.stock > 0 then
           itemtypes[#itemtypes + 1] = "consumable"
+          break
         end
       end
 
@@ -181,7 +182,7 @@ function reaction.run(message, interaction, data, response)
       end
     end
     if data.itemtype == "item" then
-      local robchance = math.random(1,2*(data.sprice+data.numrequest))
+      local robchance = math.random(1,2*data.sprice)
       if robchance < 4 then
         print("rob succeded")
         sj.itemstock = sj.itemstock - 1

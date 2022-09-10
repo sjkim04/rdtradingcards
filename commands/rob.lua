@@ -116,6 +116,29 @@ function command.run(message, mt)
   }
 
   if not mt[1] or mt[1] == "" then
+      local itemtypes = {}
+    if sj.itemstock > 0 then
+      if not uj.items[sj.item] then
+        itemtypes[1] = "item"
+      end
+    end
+    for i,v in ipairs(sj.cards) do
+      if v.stock > 0 then
+        itemtypes[#itemtypes + 1] = "card"
+        break
+      end
+    end
+    for i,v in ipairs(sj.consumables) do
+      if v.stock > 0 then
+        itemtypes[#itemtypes + 1] = "consumable"
+        break
+      end
+    end
+
+    if #itemtypes == 0 then
+      message.channel:send(lang.rob_random_nothing)
+      return
+    end
     ynbuttons(message,{
       color = 0x85c5ff,
       title = lang.robbing_shop_random,

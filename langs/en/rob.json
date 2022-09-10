@@ -38,6 +38,7 @@
 	"unknownrequest_1": "I could not find ",
 	"unknownrequest_2": " from the database. Make sure that you have spelled it right.",
 
+	"rob_random_nothing": "The shop has nothing to rob.",
 	"robbing_shop_random": "Robbing Quaint Shop...",
 	"rob_shop_random": "Are you sure you want to rob something from the **Quaint Shop**? This may **blacklist you from the shop** for a few days!",
 
