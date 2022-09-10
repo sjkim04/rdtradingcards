@@ -35,7 +35,7 @@ function reaction.run(message, interaction, data, response)
         end
       end
 
-      if #itemtypes ~= 0 and math.random(1,100) ~= 1 then
+      if #itemtypes ~= 0 then -- and math.random(1,100) ~= 1
         data.itemtype = itemtypes[math.random(1,#itemtypes)]
 
         if data.itemtype == "item" then
@@ -81,8 +81,8 @@ function reaction.run(message, interaction, data, response)
           end
           data.sprice = sj.cards[data.sindex].price
         end
-      else
-        print("shoprobtime")
+      --else
+        --print("shoprobtime")
       end
     end
 
