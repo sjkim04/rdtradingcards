@@ -13,6 +13,8 @@ function reaction.run(message, interaction, data, response)
       return
     end
 
+    if not uj.timesrobbed then uj.timesrobbed = 1 else uj.timesrobbed = uj.timesrobbed + 1 end
+
     if data.random == true then
       local itemtypes = {}
       if sj.itemstock > 0 then
@@ -84,8 +86,8 @@ function reaction.run(message, interaction, data, response)
     end
 
     if data.itemtype == "consumable" then
-      local robchance = math.random(1,data.sprice+data.numrequest)
-      if robchance == 1 then
+      local robchance = math.random(1,2*(data.sprice+data.numrequest))
+      if robchance < 4 then
         print("rob succeeded")
         sj.consumables[data.sindex].stock = sj.consumables[data.sindex].stock - data.numrequest
         if not uj.consumables then uj.consumables = {} end
@@ -100,6 +102,7 @@ function reaction.run(message, interaction, data, response)
         else
           interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
         end
+        if not uj.timesrobsucceeded then uj.timesrobsucceeded = 1 else uj.timesrobsucceeded = uj.timesrobsucceeded + 1 end
       else
         print("rob failed")
         if uj.lang == "ko" then
@@ -109,6 +112,7 @@ function reaction.run(message, interaction, data, response)
         end
         uj.lastrob = sj.stocknum
         uj.room = 2
+        if not uj.timesrobfailed then uj.timesrobfailed = 1 else uj.timesrobfailed = uj.timesrobfailed + 1 end
       end
     end
     if data.itemtype == "card" then
@@ -163,6 +167,7 @@ function reaction.run(message, interaction, data, response)
         else
           interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
         end
+        if not uj.timesrobsucceeded then uj.timesrobsucceeded = 1 else uj.timesrobsucceeded = uj.timesrobsucceeded + 1 end
       else
         print("rob failed")
         if uj.lang == "ko" then
@@ -172,20 +177,23 @@ function reaction.run(message, interaction, data, response)
         end
         uj.lastrob = sj.stocknum
         uj.room = 2
+        if not uj.timesrobfailed then uj.timesrobfailed = 1 else uj.timesrobfailed = uj.timesrobfailed + 1 end
       end
     end
     if data.itemtype == "item" then
-      local robchance = math.random(1,data.sprice)
-      if robchance == 1 then
+      local robchance = math.random(1,2*(data.sprice+data.numrequest))
+      if robchance < 4 then
         print("rob succeded")
         sj.itemstock = sj.itemstock - 1
         uj.items[data.srequest] = true
         interaction:reply(lang.rob_succeeded_item_1 .. data.sname .. lang.rob_succeeded_item_2)
+        if not uj.timesrobsucceeded then uj.timesrobsucceeded = 1 else uj.timesrobsucceeded = uj.timesrobsucceeded + 1 end
       else
         print("rob failed")
         interaction:reply(lang.rob_failed_item_1 .. data.sname .. lang.rob_failed_item_2)
         uj.lastrob = sj.stocknum
         uj.room = 2
+        if not uj.timesrobfailed then uj.timesrobfailed = 1 else uj.timesrobfailed = uj.timesrobfailed + 1 end
       end
     end
     
