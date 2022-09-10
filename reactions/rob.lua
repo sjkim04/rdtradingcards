@@ -95,7 +95,11 @@ function reaction.run(message, interaction, data, response)
         else
           uj.consumables[data.srequest] = uj.consumables[data.srequest] + adding
         end
-        interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
+        if uj.lang == "ko" then
+          interaction:reply(lang.rob_succeeded_1 .. data.sname .. lang.rob_succeeded_2 .. data.numrequest .. lang.cons_unit .. lang.rob_succeeded_3)
+        else
+          interaction:reply(lang.rob_succeeded_1 .. data.numrequest .. lang.rob_succeeded_2 .. data.sname .. lang.rob_succeeded_3)
+        end
       else
         print("rob failed")
         if uj.lang == "ko" then
@@ -161,7 +165,11 @@ function reaction.run(message, interaction, data, response)
         end
       else
         print("rob failed")
-        interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
+        if uj.lang == "ko" then
+          interaction:reply(lang.rob_failed_1 .. data.sname .. lang.rob_failed_2 .. data.numrequest .. lang.card_unit .. lang.rob_failed_3)
+        else
+          interaction:reply(lang.rob_failed_1 .. data.numrequest .. lang.rob_failed_2 .. data.sname .. lang.rob_failed_3)
+        end
         uj.lastrob = sj.stocknum
         uj.room = 2
       end
