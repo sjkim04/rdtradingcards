@@ -139,7 +139,7 @@ function command.run(message, mt, overwrite)
     _G['amtable'] = {
       pyrowmid = {"strange machine", "machine", "panda"},
       lab = {"mouse hole", "mouse", "mousehole", "peculiar box", "box", "peculiarbox", "terminal"},
-      shop = {"shop"}
+      shop = {"shop", "rob"}
     }
     
     _G['amids'] = {}
@@ -678,6 +678,9 @@ function command.run(message, mt, overwrite)
             end
             if not uj.pronouns["selection"] then
               uj.pronouns["selection"] = uj.pronouns["they"]
+            end
+            if not uj.lastrob then
+              uj.lastrob = 0
             end
           dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
           end
