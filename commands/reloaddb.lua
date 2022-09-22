@@ -676,6 +676,9 @@ function command.run(message, mt, overwrite)
             if not uj.pronouns["selection"] then
               uj.pronouns["selection"] = uj.pronouns["they"]
             end
+            if not uj.lastrob then
+              uj.lastrob = 0
+            end
           dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
           end
           print("found ".. v.trigger)
