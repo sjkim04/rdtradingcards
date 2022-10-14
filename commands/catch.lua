@@ -22,9 +22,9 @@ function command.run(message, mt)
 
   if not curfilename then
     if nopeeking then
-      message.channel:send(lang.nopeeking_1 .. mt[1] .. lang.nopeeking_2)
+      message.channel:send(formatstring(lang.nopeeking), {mt[1]})
     else
-      message.channel:send(lang.nodatabase_1 .. mt[1] .. lang.nodatabase_2)
+      message.channel:send(formatstring(lang.nodatabase, {mt[1]}))
     end
     return
   end
@@ -34,9 +34,9 @@ function command.run(message, mt)
   if not (tj[curfilename]) then
     print("user doesnt have item")
     if nopeeking then
-      message.channel:send(lang.nopeeking_1 .. mt[1] .. lang.nopeeking_2)
+      message.channel:send(formatstring(lang.nopeeking, {mt[1]}))
     else
-      message.channel:send(lang.notthrown_1 .. caughtname .. lang.notthrown_2)
+      message.channel:send(formatstring(lang.notthrown, {caughtname}))
     end
     return
   end
@@ -54,17 +54,15 @@ function command.run(message, mt)
   dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
   dpf.savejson("savedata/thrown.json", tj)
 
-  local item = cardfilename and lang.card or lang.item
-  if uj.lang == "ko" then
-    local eul_leul = (item == "카드" and "를" or "을")
-	local eul_leul_2 = (item == "카드" and "가 " or "이 ")
-    message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. eul_leul .. lang.caught_2 .. caughtname .. "** " .. item .. eul_leul_2 .. lang.caught_3)
+  local item = cardfilename and "card" or "item"
+  if item == "card" then
+    message.channel:send(formatstring(lang.caught_card, {message.author.mentionString, caughtname, uj.pronouns["their"]}))
   else
-    message.channel:send(message.author.mentionString .. lang.caught_1 .. caughtname .. "** " .. item .. lang.caught_2 .. caughtname .. "** " .. item .. lang.caught_3 .. uj.pronouns["their"] .. lang.caught_4)
+    message.channel:send(formatstring(lang.caught_item, {message.author.mentionString, caughtname, uj.pronouns["their"]}))
   end
   if not uj.togglecheckcard then
     if not uj.storage[cardfilename] then
-      message.channel:send(lang.not_in_storage_1 .. caughtname .. lang.not_in_storage_2)
+      message.channel:send(formatstring(lang.not_in_storage, {caughtname}))
     end
   end
 end
