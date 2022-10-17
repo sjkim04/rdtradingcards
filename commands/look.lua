@@ -470,11 +470,7 @@ function command.run(message, mt)
       local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
       local shopstr = ""
       for i,v in ipairs(sj.cards) do
-        if uj.lang == "ko" then
-        _G['tokentext'] = lang.shop_token_1 .. v.price .. lang.shop_token_2
-        else
-        _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
-        end
+        local tokentext = formatstring(lang.shop_token, {v.price}, lang.plural_s)
         if showShortHandForm == true then
           shopstr = shopstr .. "\n**"..cdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
         elseif showSeasons == true then
@@ -484,11 +480,7 @@ function command.run(message, mt)
         end
       end
       for i,v in ipairs(sj.consumables) do
-        if uj.lang == "ko" then
-        _G['tokentext'] = lang.shop_token_1 .. v.price .. lang.shop_token_2
-        else
-        _G['tokentext'] = v.price .. lang.shop_token_1 .. (v.price ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
-        end
+        
         if showShortHandForm == true then
           shopstr = shopstr .. "\n**"..consdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
         else
@@ -497,18 +489,10 @@ function command.run(message, mt)
       end
 
       if showShortHandForm == true then
-        if uj.lang == "ko" then
-        _G['tokentext'] = lang.shop_token_1 .. sj.itemprice .. lang.shop_token_2
-        else
-        _G['tokentext'] = sj.itemprice .. lang.shop_token_1 .. (sj.itemprice ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
-        end
+        local tokentext = formatstring(lang.shop_token, {sj.itemprice}, lang.plural_s)
         shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock.." | ("..sj.item..")"
       else
-        if uj.lang == "ko" then
-        _G['tokentext'] = lang.shop_token_1 .. sj.itemprice .. lang.shop_token_2
-        else
-        _G['tokentext'] = sj.itemprice .. lang.shop_token_1 .. (sj.itemprice ~= 1 and lang.needs_plural_s == true and lang.plural_s or "")
-        end
+        local tokentext = formatstring(lang.shop_token, {sj.itemprice}, lang.plural_s)
         shopstr = shopstr .. "\n**"..itemdb[sj.item].name.."** (" .. tokentext ..") x"..sj.itemstock
       end
 
@@ -524,7 +508,7 @@ function command.run(message, mt)
         image = {url = "attachment://shop.png"}},
         files = {getshopimage()}}
       if not uj.togglechecktoken then
-        message.channel:send(lang.checktoken_1 .. uj.tokens .. lang.checktoken_2 .. (uj.tokens ~= 1 and lang.needs_plural_s == true and lang.plural_s or "") .. lang.checktoken_3)
+        message.channel:send(formatstring(lang.checktoken, {uj.tokens}))
       end
       
     elseif (request == "wolf" or (uj.lang ~= "en" and request == lang.request_wolf))  then
@@ -557,7 +541,7 @@ function command.run(message, mt)
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_wolf,
-        description = lang.looking_wolf_1 .. durationtext .. lang.looking_wolf_2,
+        description = formatstring(lang.looking_wolf, {durationtext}),
       }}
       
     elseif (request == "ghost" or (uj.lang ~= "en" and request == lang.request_ghost))  then 
@@ -577,7 +561,7 @@ function command.run(message, mt)
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = lang.looking_at_photo,
-        description = lang.looking_photo .. (imageindex ~= 1 and lang.looking_photo_ookami or ""),
+        description = lang.looking_photo .. (imageindex ~= 1 and lang.looking_photo_okamii or ""),
         image = {url = randomimages[imageindex]}
       }}
       
@@ -604,7 +588,7 @@ function command.run(message, mt)
       }}
     
     else
-      message.channel:send(lang.not_found_1 .. mt[1] .. lang.not_found_2)
+      message.channel:send(formatstring(lang.not_found, {mt[1]}))
       uj.timeslooked = uj.timeslooked - 1
     end
   end
