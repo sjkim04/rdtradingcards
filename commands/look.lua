@@ -480,7 +480,7 @@ function command.run(message, mt)
         end
       end
       for i,v in ipairs(sj.consumables) do
-        
+        local tokentext = formatstring(lang.shop_token, {v.price}, lang.plural_s)
         if showShortHandForm == true then
           shopstr = shopstr .. "\n**"..consdb[v.name].name.."** (".. tokentext .. ") x"..v.stock .. " | ("..v.name..")"
         else
