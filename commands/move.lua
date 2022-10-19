@@ -45,7 +45,7 @@ function command.run(message, mt)
     print("newroom is ".. newroom)
     local sj = dpf.loadjson("savedata/shop.json", defaultshopsave)
     if newroom == uj.room then
-      message.channel:send(lang.already_in_1 .. locations[newroom+1] .. lang.already_in_2)
+      message.channel:send(formatstring(lang.already_in, {locations[newroom+1]}))
       return
     elseif newroom == 3 and uj.lastrob + 4 > sj.stocknum and uj.lastrob ~= 0 then
       lang = dpf.loadjson("langs/" .. uj.lang .. "/rob.json")
@@ -87,16 +87,18 @@ function command.run(message, mt)
       return "blacklisted"
     else
       uj.room = newroom
-      if uj.lang == "ko" and newroom == 2 then
-        message.channel:send(lang.room_changed_1 .. locations[newroom+1] .. lang.room_changed_2 .. lang.eu .. lang.room_changed_3)
+      local formattable = {locations[newroom+1]}
+      if newroom == 2 then
+        formattable[2] = lang.eu
       else
-        message.channel:send(lang.room_changed_1 .. locations[newroom+1] .. lang.room_changed_2 .. lang.room_changed_3)
+        formattable[2] = ""
       end
+      message.channel:send(formatstring(lang.room_changed, formattable))
       dpf.savejson("savedata/" .. message.author.id .. ".json",uj)
       return uj
     end
   else
-    message.channel:send(lang.no_room_1 .. mt[1] .. lang.no_room_2)
+    message.channel:send(formatstring(lang.no_room, {mt[1]}))
   end
 
 end
