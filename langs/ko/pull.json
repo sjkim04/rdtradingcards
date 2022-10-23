@@ -1,4 +1,6 @@
 {
+	"needs_plural_s": false,
+	
 	"dm_message": "죄송하지만, DM에서 카드를 뽑으실 수는 없습니다!",
 	
 	"time_hour":  "시간",

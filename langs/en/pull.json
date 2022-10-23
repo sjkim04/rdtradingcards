@@ -1,4 +1,6 @@
 {
+	"needs_plural_s": true,
+	
 	"dm_message": "Sorry, but you cannot pull cards in DMs!",
 	
 	"time_hour":  " hour",
