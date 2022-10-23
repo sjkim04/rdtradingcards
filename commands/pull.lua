@@ -152,7 +152,7 @@ local time = sw:getTime()
       message.channel:send{embed = {
         color = 0x85c5ff,
         title = title,
-        description = formatstring(lang.pulled_message, {nil, message.author.mentionString, cardname, uj.pronouns["their"], v}),
+        description = formatstring(lang.pulled_message, {"", message.author.mentionString, cardname, uj.pronouns["their"], v}),
         image = {url = type(cdb[v].embed) == "table" and cdb[v].embed[math.random(#cdb[v].embed)] or cdb[v].embed}
       }}
     else
