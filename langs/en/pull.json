@@ -1,14 +1,11 @@
 {
-	"needs_plural_s": true,
-	
 	"dm_message": "Sorry, but you cannot pull cards in DMs!",
 	
 	"time_hour":  " hour",
 	"time_plural_s": "s",
 	"time_and": " and ",
 	"time_minute": " minute",
-	"wait_message_1": "Please wait ",
-	"wait_message_2":  " before pulling again.",
+	"wait_message": "Please wait {1} before pulling again.",
 	
 	"pulling_card": "Pulling card...",
 	
@@ -18,15 +15,9 @@
 	"pulled_doubleclick": "Doubleclick!",
 	"pulled_tripleclick": "Tripleclick!!!",
 	
-	"rdnot_message_1": " got a What is RD Not? card! The What is RD Not? card has been added to ",
-	"rdnot_message_2": " inventory. The shorthand form of this card is rdnot.\n",
+	"rdnot_message": "```{1}\n@{2} got a What is RD Not? card! The What is RD Not? card has been added to {3} inventory. The shorthand form of this card is rdnot.\n",
 	
-	"pulled_message_1": " got a **",
-	"pulled_message_2": "** card! The **",
-	"pulled_message_3": "** card has been added to ",
-	"pulled_message_4": " inventory. The shorthand form of this card is **",
-	"pulled_message_5": "**.",
+	"pulled_message": "{2} got a **{3}** card! The **{3}** card has been added to {4} inventory. The shorthand form of this card is **{5}**.",
 	
-	"not_in_storage_1": "You do not have the **",
-	"not_in_storage_2": "** card in your storage!",
+	"not_in_storage": "You do not have the **{1}** card in your storage!",
 }

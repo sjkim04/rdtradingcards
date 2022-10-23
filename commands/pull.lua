@@ -43,7 +43,7 @@ local time = sw:getTime()
         end
       end
     end
-    message.channel:send(lang.wait_message_1 .. durationtext .. lang.wait_message_2)
+    message.channel:send(formatstring(lang.wait_message, {durationtext}))
     return
   end
   
@@ -138,64 +138,33 @@ local time = sw:getTime()
     if i == 3 then title = lang.pulled_tripleclick end
 
     if v == "rdnot" then
-      if uj.lang == "ko" then
-        message.channel:send("```" .. title .. "\n@" .. message.author.name .. lang.rdnot_message_1 .. lang.rdnot_message_2 .. [[
-_________________
-| SR            |
-|               |
-|    \____/     |
-|    / TT \  /  |
-|   /|____|\/   |
-|     l  l      |
-|             𝅘𝅥𝅯 |
-_________________```]])
-      else
-        message.channel:send("```" .. title .. "\n@" .. message.author.name .. lang.rdnot_message_1 .. uj.pronouns["their"] .. lang.rdnot_message_2 .. [[
-_________________
-| SR            |
-|               |
-|    \____/     |
-|    / TT \  /  |
-|   /|____|\/   |
-|     l  l      |
-|             𝅘𝅥𝅯 |
-_________________```]])
-      end
+      message.channel:send(formatstring(rdnot_message .. [[
+        _________________
+        | SR            |
+        |               |
+        |    \____/     |
+        |    / TT \  /  |
+        |   /|____|\/   |
+        |     l  l      |
+        |             𝅘𝅥𝅯 |
+        _________________```]], {title, message.author.name, uj.pronouns["their"]}))
     elseif not cdb[v].spoiler then
-      if uj.lang == "ko" then 
-        message.channel:send{embed = {
-          color = 0x85c5ff,
-          title = title,
-          description = message.author.mentionString .. lang.pulled_message_1 .. cardname .. lang.pulled_message_2 .. cardname .. lang.pulled_message_3 .. lang.pulled_message_4 .. v .. lang.pulled_message_5,
-          image = {url = type(cdb[v].embed) == "table" and cdb[v].embed[math.random(#cdb[v].embed)] or cdb[v].embed}
-        }}
-      else
-        message.channel:send{embed = {
-          color = 0x85c5ff,
-          title = title,
-          description = message.author.mentionString .. lang.pulled_message_1 .. cardname .. lang.pulled_message_2 .. cardname .. lang.pulled_message_3 .. uj.pronouns["their"] .. lang.pulled_message_4 .. v .. lang.pulled_message_5,
-          image = {url = type(cdb[v].embed) == "table" and cdb[v].embed[math.random(#cdb[v].embed)] or cdb[v].embed}
-        }}
-      end
+      message.channel:send{embed = {
+        color = 0x85c5ff,
+        title = title,
+        description = formatstring(lang.pulled_message, {nil, message.author.mentionString, cardname, uj.pronouns["their"], v}),
+        image = {url = type(cdb[v].embed) == "table" and cdb[v].embed[math.random(#cdb[v].embed)] or cdb[v].embed}
+      }}
     else
       print("spider moments")
-      if uj.lang == "ko" then
-        message.channel:send{
-          content = "**" .. title .. "**\n" .. message.author.mentionString .. lang.pulled_message_1 .. cardname .. lang.pulled_message_2 .. cardname .. lang.pulled_message_3 .. lang.pulled_message_4 .. v .. lang.pulled_message_5,
-          file = "card_images/SPOILER_" .. v .. ".png"
-        }
-      else
-        message.channel:send{embed = {
-          color = 0x85c5ff,
-          title = title,
-          description = message.author.mentionString .. lang.pulled_message_1 .. cardname .. lang.pulled_message_2 .. cardname .. lang.pulled_message_3 .. uj.pronouns["their"] .. lang.pulled_message_4 .. v .. lang.pulled_message_5,
-          image = {url = type(cdb[v].embed) == "table" and cdb[v].embed[math.random(#cdb[v].embed)] or cdb[v].embed}
-        }}
-      end
+      message.channel:send{
+        content = formatstring("**{1}**\n" .. lang.pulled_message, {title, message.author.mentionString, cardname, uj.pronouns["their"], v}),
+        file = "card_images/SPOILER_" .. v .. ".png"
+      }
     end
     if not uj.togglecheckcard then
       if not uj.storage[v] then
-        message.channel:send(lang.not_in_storage_1 .. cardname .. lang.not_in_storage_2)
+        message.channel:send(formatstring(lang.not_in_storage, {cardname}))
       end
     end
   end

@@ -22,10 +22,10 @@ function command.run(message)
         missingcount = missingcount + 1
       end
     end
-    message.channel:send(lang.missingcards_1 .. missingcount .. lang.missingcards_2)
+    message.channel:send(formatstring(lang.missingcards, {missingcount}))
     return
   end
 
-  ynbuttons(message, message.author.mentionString .. lang.prestige_confirm, "prestige", {}, uj.id, uj.lang)
+  ynbuttons(message, formatstring(lang.prestige_confirm, {message.author.mentionString}), "prestige", {}, uj.id, uj.lang)
 end
 return command
