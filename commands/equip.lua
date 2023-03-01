@@ -80,6 +80,12 @@ function command.run(message, mt)
     if not uj.skipprompts then
       ynbuttons(message,formatstring(lang.prompt, {itemdb[uj.equipped].name, itemdb[curfilename].name}),"equip",{newequip = curfilename}, uj.id, uj.lang)
     else
+		if uj.equipped == 'aceofhearts' then
+			if uj.acepulls ~= 0 then
+				message.channel:send('The pulls stored in your **Ace of Hearts** disappear...')
+				uj.acepulls = 0
+			end
+		end
       uj.equipped = curfilename
 	    message.channel:send(formatstring(lang.equipped,{uj.id, itemdb[curfilename].name, uj.pronouns["their"]}))
 	  end
